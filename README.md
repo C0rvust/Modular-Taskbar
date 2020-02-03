@@ -7,7 +7,7 @@ A rainmeter skin that acts as a taskbar replacement.
 
 ---
 
-**Certain functionalities require the follwoing software.**
+**Certain functionalities require the following software.**
 
 - [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter)
 - [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying)
