@@ -5,5 +5,15 @@ A rainmeter skin that acts as a taskbar replacement.
 
 [Download here](https://github.com/C0rvust/Modular-Taskbar/releases).
 
-Credits where credits due:
-[Polybar | Khanhas](https://github.com/khanhas/Polybar) - Uses a script found here. 
+---
+
+**Certain functionalities require the follwoing software.**
+
+- [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter)
+- [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying)
+
+---
+
+**Credits where credits due:**
+
+- [Polybar | Khanhas](https://github.com/khanhas/Polybar) - Uses a script found here.  
