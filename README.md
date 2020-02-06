@@ -28,6 +28,12 @@ A rainmeter skin that acts as a taskbar replacement.
   - **WSM**
     - Manage your virtual desktops
 
+- Modules planned:
+  - **Weather**
+    - ~~Jelle Pls grant us the forbidden knowledge~~ Provides information on current weather
+  - **ActiveWindow**
+    - Provides inforomation on open applications
+
 ---
 
 **Certain functionalities require the following software.**
