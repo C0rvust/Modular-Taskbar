@@ -32,4 +32,4 @@ Key Functionalities
 
 **Credits where credits due:**
 
-- [Polybar | Khanhas](https://github.com/khanhas/Polybar) - Uses a script found here.  
+- [Polybar | Khanhas](https://github.com/khanhas/Polybar) - Design Inspiration. Also uses script(s) found here.
