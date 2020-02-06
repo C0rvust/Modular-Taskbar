@@ -13,13 +13,20 @@ Key Functionalities
 - Modules can be included / excluded by editing `ModuleList.inc`.
 
 - Current modules include:
-  - Battery
-  - Clock
-  - NowPlaying
-  - Power
-  - Start
-  - Volume
-  - WSM
+  - Battery 
+    - (Provides battery information)
+  - Clock 
+    - (Provides current time)
+  - NowPlaying 
+    - (Provides information from current song - Open Popup by right click)
+  - Power 
+    - (Power down Shortcut - Double Click to shutdown, right click to cancel)
+  - Start 
+    - (Shortcut list - Open Popup by left click)
+  - Volume 
+    - (Provides volume information)
+  - WSM 
+    - (Work Space Manager - manage your virtual desktops)
 
 ---
 
