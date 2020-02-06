@@ -7,6 +7,22 @@ A rainmeter skin that acts as a taskbar replacement.
 
 ---
 
+Key Functionalities
+
+- Modules can be moved individually by changing certain variables in their respective `.inc` files in `@resources/Modules`.
+- Modules can be included / excluded by editing `ModuleList.inc`.
+
+- Current modules include:
+  - Battery
+  - Clock
+  - NowPlaying
+  - Power
+  - Star
+  - Volume
+  - WSM
+
+---
+
 **Certain functionalities require the following software.**
 
 - [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter)
