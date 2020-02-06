@@ -7,26 +7,26 @@ A rainmeter skin that acts as a taskbar replacement.
 
 ---
 
-Key Functionalities
+**Key Functionalities:**
 
 - Modules can be moved individually by changing certain variables in their respective `.inc` files in `@resources/Modules`.
 - Modules can be included / excluded by editing `ModuleList.inc`.
 
 - Current modules include:
-  - Battery 
-    - (Provides battery information)
-  - Clock 
-    - (Provides current time)
-  - NowPlaying 
-    - (Provides information from current song - Open Popup by right click)
-  - Power 
-    - (Power down Shortcut - Double Click to shutdown, right click to cancel)
-  - Start 
-    - (Shortcut list - Open Popup by left click)
-  - Volume 
-    - (Provides volume information)
-  - WSM 
-    - (Work Space Manager - manage your virtual desktops)
+  - **Battery**
+    - Provides battery information
+  - **Clock**
+    - Provides current time
+  - **NowPlaying**
+    - Provides information from current song - Open Popup by right click
+  - **Power**
+    - Power down Shortcut - Double Click to shutdown, right click to cancel
+  - **Start**
+    - Shortcut list - Open Popup by left click
+  - **Volume**
+    - Provides volume information
+  - **WSM**
+    - Manage your virtual desktops
 
 ---
 
