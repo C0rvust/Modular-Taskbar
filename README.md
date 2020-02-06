@@ -17,7 +17,7 @@ Key Functionalities
   - Clock
   - NowPlaying
   - Power
-  - Star
+  - Start
   - Volume
   - WSM
 
