@@ -1,5 +1,7 @@
 # Modular-Taskbar
-A rainmeter skin that acts as a taskbar replacement.
+A Rainmeter skin that acts as a taskbar replacement. 
+
+The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](https://www.rainmeter.net/).
 
 ![Preview](https://user-images.githubusercontent.com/40166216/73678141-a209e500-46af-11ea-8045-974914203a1c.png)
 
