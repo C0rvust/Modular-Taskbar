@@ -43,7 +43,7 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 - [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter)
 - [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying)
 
-- Using Spotify as your music player? You'll need [Spicetify](https://github.com/khanhas/spicetify-cli) in order for the music player to work. You can follow the Rainmeter specific instructions as listed [here](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user).
+- [Spicetify | khanhas](https://github.com/khanhas/spicetify-cli) Using Spotify as your music player? You'll need this in order for the music player to work. You can follow the Rainmeter specific instructions as listed [here](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user).
 
 ---
 
