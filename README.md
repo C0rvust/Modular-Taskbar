@@ -18,7 +18,7 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 
 - [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying) Already bundled within the installer, no followup required.
 
-- [Spicetify | khanhas](https://github.com/khanhas/spicetify-cli) Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Used in conjunction with WebNowPlaying to grab music info from Spotify.
+- [Spicetify-CLI | khanhas](https://github.com/khanhas/spicetify-cli) Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Used in conjunction with WebNowPlaying to grab music info from Spotify.
 
 ---
 
