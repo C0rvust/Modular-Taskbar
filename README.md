@@ -9,6 +9,17 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 
 [Download here](https://github.com/C0rvust/Modular-Taskbar/releases).
 
+
+---
+
+**Requirements**
+
+- [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter) Follow the [installation instructions](https://github.com/khanhas/MagickMeter#how-to-install). Used for image processing.
+
+- [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying) Already bundled within the installer, no followup required.
+
+- [Spicetify | khanhas](https://github.com/khanhas/spicetify-cli) Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Used in conjunction with WebNowPlaying to grap music info from Spotify.
+
 ---
 
 **Key Functionalities:**
@@ -37,19 +48,3 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
     - ~~Jelle Pls grant us the forbidden knowledge~~ Provides information on current weather
   - **ActiveWindow**
     - Provides inforomation on open applications
-
----
-
-**Certain functionalities require the following software.**
-
-- [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter) Used for image processing in NowPlaying. Please follow the  instructions listed.
-
-- [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying) Used for grabbing music info from browsers in NowPlaying. Bundled with the installer.
-
-- [Spicetify | khanhas](https://github.com/khanhas/spicetify-cli) Used for grabbing music info from Spotify in conjunction with WebNowPlaying. Please follow the instructions listed [here](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user).
-
----
-
-**Credits where credits due:**
-
-- [Polybar | Khanhas](https://github.com/khanhas/Polybar) - Design Inspiration. Also uses script(s) found here.
