@@ -24,8 +24,7 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 
 **Key Functionalities:**
 
-- Modules can be moved individually by changing certain variables in their respective `.inc` files in `@resources/Modules`.
-- Modules can be included / excluded by editing `ModuleList.inc`.
+- Open the Settings skin (accessible in context menu) to activate/deactivate & position modules.
 
 - Current modules include:
   - **Battery**
