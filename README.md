@@ -20,7 +20,7 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 
 - [Spicetify-CLI | khanhas](https://github.com/khanhas/spicetify-cli) Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Required only if you use spotify.
 
-- [Powershell 3.0 or above](https://github.com/khanhas/PowershellRM#requirements) For Win 10 users no actions are required. For Win 7 users, you may have to upgrade your powershell version.
+- [PowershellRM](https://github.com/khanhas/PowershellRM#requirements) Follow the [Powershell upgrade instructions](https://github.com/khanhas/PowershellRM#requirements) if you are a win 7 user. For win 10 users, no further actions are required.
 
 ---
 
