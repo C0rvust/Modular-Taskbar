@@ -1,6 +1,12 @@
+[Metadata]
+Name=Battery
+Description=Displays Battery level. Click to display Uptime.
+
 [Variables]
-module.Battery.Position=1626
+module.Battery.Position=1424
 module.Battery.Anchor=2
+
+; Do not change
 module.Battery.Width=(2*#body.ElementSize#)
 
 [module.Battery.StyleIconString]
@@ -35,13 +41,15 @@ y=#body.Padding#
 w=#module.Battery.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
+DynamicVariables=1
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Battery_PopUp.ini"][!ActivateConfig "#ROOTCONFIG#\PopUp" "Battery_PopUp.ini"]
 
 [module.Battery.BatteryIcon]
 MeterStyle=module.Battery.StyleIconString
 Meter=String
 x=(#body.ElementSize#*12/24)
 y=(#body.ElementSize#*12/24)
-Text=MI-Battery-MI
+Text=Battery
 Container=module.Battery.Container
 
 [Module.Battery.PercentageDisplay]

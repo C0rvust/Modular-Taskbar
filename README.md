@@ -16,28 +16,27 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 
 - [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter) Follow the [installation instructions](https://github.com/khanhas/MagickMeter#how-to-install). Used for image processing.
 
-- [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying) Already bundled within the installer, no followup required.
+- [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying) Follow the browser extension [installation instructions](https://github.com/tjhrulz/WebNowPlaying#extension-links). 
 
-- [Spicetify-CLI | khanhas](https://github.com/khanhas/spicetify-cli) Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Used in conjunction with WebNowPlaying to grab music info from Spotify.
+- [Spicetify-CLI | khanhas](https://github.com/khanhas/spicetify-cli) Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Required only if you use spotify.
 
 ---
 
 **Key Functionalities:**
 
-- Modules can be moved individually by changing certain variables in their respective `.inc` files in `@resources/Modules`.
-- Modules can be included / excluded by editing `ModuleList.inc`.
+- Open the Settings skin (accessible in context menu) to activate/deactivate & position modules.
 
 - Current modules include:
   - **Battery**
     - Provides battery information
   - **Clock**
-    - Provides current time
+    - Provides information for current time and date
   - **NowPlaying**
-    - Provides information from current song - Open Popup by right click
+    - Provides information for music info
   - **Power**
-    - Power down Shortcut - Double Click to shutdown, right click to cancel
+    - Provides options for powering down
   - **Start**
-    - Shortcut list - Open Popup by left click
+    - Provides accessible shortcuts
   - **Volume**
     - Provides volume information
   - **WSM**
@@ -45,6 +44,4 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 
 - Modules planned:
   - **Weather**
-    - ~~Jelle Pls grant us the forbidden knowledge~~ Provides information on current weather
   - **ActiveWindow**
-    - Provides inforomation on open applications

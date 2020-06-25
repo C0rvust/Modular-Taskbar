@@ -1,9 +1,14 @@
-[Variables]
-module.WSM.NumIndicator=4
+[Metadata]
+Name=WSM
+Description=Displays virtual desktop info. Click a number to navigate to that workspace. Click the highlighted (current) workspace to remove it. Click a + sign to create new workspace. Right click on either end to jump to a new page.
 
-module.WSM.Position=302
+[Variables]
+module.WSM.Position=84
 module.WSM.Anchor=0
-module.WSM.Width=(#module.WSM.NumIndicator#*#body.ElementSize#)
+
+; Do not change
+module.WSM.NoInd=4
+module.WSM.Width=(#module.WSM.NoInd#*#body.ElementSize#)
 
 [module.WSM.StyleVDInd]
 Group=module.WSM.VDInd
@@ -11,128 +16,130 @@ x=#body.ElementSize#r
 y=r
 w=#body.ElementSize#
 h=#body.ElementSize#
+MeasureName=#CurrentSection#.Calc
 InlineSetting=Face | #font.DisplayName#
 InlineSetting2=Size | #font.SizeStd#
 InlineSetting3=Face | #font.IconName#
-InlinePattern3=(MI-.*?-MI)
+InlinePattern3=(ItemEmpty|ItemAdd)
 InlineSetting4=Size | (0.75*#body.ElementSize#)
-InlinePattern4=(MI-.*?-MI)
+InlinePattern4=(ItemEmpty|ItemAdd)
 InlineSetting5=Color | #colour.2.Code#,(#colour.2.Alpha#*0.50)
 InlineSetting6=Color | #colour.2.Code#,#colour.2.Alpha#
-InlinePattern6=[module.WSM.VDScript.Current]
+InlinePattern6=[module.WSM.PSRM.Current]
 SolidColor=0,0,0,1
 StringAlign=CenterCenter
 AntiAlias=1
 DynamicVariables=1
+LeftMouseUpAction=[!CommandMeasure module.WSM.PSRM "[#CurrentSection#.Act]" ][!SetOption module.WSM.PageCalc.Current formula "(floor((module.WSM.PSRM.Current-1)/#module.WSM.NoInd#))"][!UpdateMeasureGroup module.WSM.VirtualDesktop][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
+Container=module.WSM.Container
 
-[module.WSM.VDScript]
+[module.WSM.PSRM]
 Group=module.WSM.VirtualDesktop
 Measure=Plugin
 Plugin=PowershellRM
-ScriptFile=#@#Scripts/VirtualDesktop.ps1
-UpdateDivider=-1
+ScriptFile=#@#includes\WSM\VirtualDesktop.ps1
 
-[module.WSM.VDScript.Total]
+[module.WSM.PSRM.Total]
 Group=module.WSM.VirtualDesktop
 Measure=Plugin
 Plugin=PowershellRM
-Parent=module.WSM.VDScript
+Parent=module.WSM.PSRM
 Line=Get-DesktopCount
-UpdateDivider=(1000/#UpdateInterval#)
+UpdateDivider=(500/#UpdateInterval#)
 OnChangeAction=[!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
 
-[module.WSM.VDScript.Current]
+[module.WSM.PSRM.Current]
 Group=module.WSM.VirtualDesktop
 Measure=Plugin
 Plugin=PowershellRM
-Parent=module.WSM.VDScript
+Parent=module.WSM.PSRM
 Line=(Get-CurrentDesktop | Get-DesktopIndex) + 1
-UpdateDivider=(1000/#UpdateInterval#)
+UpdateDivider=(500/#UpdateInterval#)
 OnChangeAction=[!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
 
-[module.WSM.PageCalc.Current]
+[module.WSM.PageCalc]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=(floor((module.WSM.VDScript.Current-1)/#module.WSM.NumIndicator#))
+Formula=(floor((module.WSM.PSRM.Current-1)/#module.WSM.NoInd#))
 DynamicVariables=1
 
 [module.WSM.PageCalc.Prev]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=Clamp((module.WSM.PageCalc.Current-1),0,(ceil(module.WSM.VDScript.Total/#module.WSM.NumIndicator#)-1))
+Formula=Clamp((module.WSM.PageCalc-1),0,(ceil(module.WSM.PSRM.Total/#module.WSM.NoInd#)-1))
 
 [module.WSM.PageCalc.Next]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=Clamp((module.WSM.PageCalc.Current+1),0,(ceil(module.WSM.VDScript.Total/#module.WSM.NumIndicator#)-1))
+Formula=Clamp((module.WSM.PageCalc+1),0,(ceil(module.WSM.PSRM.Total/#module.WSM.NoInd#)-1))
 
 [Module.WSM.ControlNextAction]
 Measure=Calc
-Formula=((module.WSM.VDScript.Total%#module.WSM.NumIndicator#)+((ceil(module.WSM.VDScript.Total/#module.WSM.NumIndicator#)-1)-(module.WSM.PageCalc.Current)))
-IfCondition=((module.WSM.VDScript.Total%#module.WSM.NumIndicator#)+((ceil(module.WSM.VDScript.Total/#module.WSM.NumIndicator#)-1)-(module.WSM.PageCalc.Current)))=0
-IfTrueAction=[!CommandMeasure module.WSM.VDScript "New-Desktop | Switch-Desktop"]
-IfFalseAction=[!SetOption module.WSM.PageCalc.Current formula "[module.WSM.PageCalc.Next]"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
+Formula=((module.WSM.PSRM.Total%#module.WSM.NoInd#)+((ceil(module.WSM.PSRM.Total/#module.WSM.NoInd#)-1)-(module.WSM.PageCalc)))
+IfCondition=((module.WSM.PSRM.Total%#module.WSM.NoInd#)+((ceil(module.WSM.PSRM.Total/#module.WSM.NoInd#)-1)-(module.WSM.PageCalc)))=0
+IfTrueAction=[!CommandMeasure module.WSM.PSRM "New-Desktop | Switch-Desktop"]
+IfFalseAction=[!SetOption module.WSM.PageCalc formula "[module.WSM.PageCalc.Next]"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
 DynamicVariables=1
 Disabled=1
 IfConditionMode=1
 OnUpdateAction=[!DisableMeasure #CurrentSection#]
 
-[module.WSM.IndChar.1]
+[module.WSM.VDInd.1.Calc]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=(((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+1)>module.WSM.VDScript.Total+1) ? (-1) : (((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+1)=(module.WSM.VDScript.Total+1)) ? (-2) : (#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+1)))
+Formula=(((#module.WSM.NoInd#*module.WSM.PageCalc+1)>module.WSM.PSRM.Total+1) ? (-1) : (((#module.WSM.NoInd#*module.WSM.PageCalc+1)=(module.WSM.PSRM.Total+1)) ? (-2) : (#module.WSM.NoInd#*module.WSM.PageCalc+1)))
 RegExpSubstitute=1
-Substitute="^-1$":"MI-ItemEmpty-MI","^-2$":"MI-ItemAdd-MI"
+Substitute="^-1$":"ItemEmpty","^-2$":"ItemAdd"
 
-[module.WSM.IndChar.2]
+[module.WSM.VDInd.2.Calc]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=(((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+2)>module.WSM.VDScript.Total+1) ? (-1) : (((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+2)=(module.WSM.VDScript.Total+1)) ? (-2) : (#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+2)))
+Formula=(((#module.WSM.NoInd#*module.WSM.PageCalc+2)>module.WSM.PSRM.Total+1) ? (-1) : (((#module.WSM.NoInd#*module.WSM.PageCalc+2)=(module.WSM.PSRM.Total+1)) ? (-2) : (#module.WSM.NoInd#*module.WSM.PageCalc+2)))
 RegExpSubstitute=1
-Substitute="^-1$":"MI-ItemEmpty-MI","^-2$":"MI-ItemAdd-MI"
+Substitute="^-1$":"ItemEmpty","^-2$":"ItemAdd"
 
-[module.WSM.IndChar.3]
+[module.WSM.VDInd.3.Calc]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=(((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+3)>module.WSM.VDScript.Total+1) ? (-1) : (((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+3)=(module.WSM.VDScript.Total+1)) ? (-2) : (#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+3)))
+Formula=(((#module.WSM.NoInd#*module.WSM.PageCalc+3)>module.WSM.PSRM.Total+1) ? (-1) : (((#module.WSM.NoInd#*module.WSM.PageCalc+3)=(module.WSM.PSRM.Total+1)) ? (-2) : (#module.WSM.NoInd#*module.WSM.PageCalc+3)))
 RegExpSubstitute=1
-Substitute="^-1$":"MI-ItemEmpty-MI","^-2$":"MI-ItemAdd-MI"
+Substitute="^-1$":"ItemEmpty","^-2$":"ItemAdd"
 
-[module.WSM.IndChar.4]
+[module.WSM.VDInd.4.Calc]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=(((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+4)>module.WSM.VDScript.Total+1) ? (-1) : (((#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+4)=(module.WSM.VDScript.Total+1)) ? (-2) : (#module.WSM.NumIndicator#*module.WSM.PageCalc.Current+4)))
+Formula=(((#module.WSM.NoInd#*module.WSM.PageCalc+4)>module.WSM.PSRM.Total+1) ? (-1) : (((#module.WSM.NoInd#*module.WSM.PageCalc+4)=(module.WSM.PSRM.Total+1)) ? (-2) : (#module.WSM.NoInd#*module.WSM.PageCalc+4)))
 RegExpSubstitute=1
-Substitute="^-1$":"MI-ItemEmpty-MI","^-2$":"MI-ItemAdd-MI"
+Substitute="^-1$":"ItemEmpty","^-2$":"ItemAdd"
 
-[Module.WSM.IndAct.1]
+[Module.WSM.VDInd.1.Act]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=((module.WSM.IndChar.1=module.WSM.VDScript.Current) ? (((module.WSM.IndChar.1=1) && (module.WSM.VDScript.Total=1)) ? (-2) : (module.WSM.IndChar.1-0.5)) : (module.WSM.IndChar.1-1))
-RegExpSubstitute=1
-Substitute="^-3$":"New-desktop | Switch-Desktop","^-2$":"","^(\d{0,})\.5$":"Remove-Desktop \1","^(\d){1,}$":"Switch-Desktop \1"
-DynamicVariables=1
-
-[Module.WSM.IndAct.2]
-Group=module.WSM.PageCalc
-Measure=Calc
-Formula=((module.WSM.IndChar.2=module.WSM.VDScript.Current) ? (((module.WSM.IndChar.2=1) && (module.WSM.VDScript.Total=1)) ? (-2) : (module.WSM.IndChar.2-0.5)) : (module.WSM.IndChar.2-1))
+Formula=((module.WSM.VDInd.1.Calc=module.WSM.PSRM.Current) ? (((module.WSM.VDInd.1.Calc=1) && (module.WSM.PSRM.Total=1)) ? (-2) : (module.WSM.VDInd.1.Calc-0.5)) : (module.WSM.VDInd.1.Calc-1))
 RegExpSubstitute=1
 Substitute="^-3$":"New-desktop | Switch-Desktop","^-2$":"","^(\d{0,})\.5$":"Remove-Desktop \1","^(\d){1,}$":"Switch-Desktop \1"
 DynamicVariables=1
 
-[Module.WSM.IndAct.3]
+[Module.WSM.VDInd.2.Act]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=((module.WSM.IndChar.3=module.WSM.VDScript.Current) ? (((module.WSM.IndChar.3=1) && (module.WSM.VDScript.Total=1)) ? (-2) : (module.WSM.IndChar.3-0.5)) : (module.WSM.IndChar.3-1))
+Formula=((module.WSM.VDInd.2.Calc=module.WSM.PSRM.Current) ? (((module.WSM.VDInd.2.Calc=1) && (module.WSM.PSRM.Total=1)) ? (-2) : (module.WSM.VDInd.2.Calc-0.5)) : (module.WSM.VDInd.2.Calc-1))
 RegExpSubstitute=1
 Substitute="^-3$":"New-desktop | Switch-Desktop","^-2$":"","^(\d{0,})\.5$":"Remove-Desktop \1","^(\d){1,}$":"Switch-Desktop \1"
 DynamicVariables=1
 
-[Module.WSM.IndAct.4]
+[Module.WSM.VDInd.3.Act]
 Group=module.WSM.PageCalc
 Measure=Calc
-Formula=((module.WSM.IndChar.4=module.WSM.VDScript.Current) ? (((module.WSM.IndChar.4=1) && (module.WSM.VDScript.Total=1)) ? (-2) : (module.WSM.IndChar.4-0.5)) : (module.WSM.IndChar.4-1))
+Formula=((module.WSM.VDInd.3.Calc=module.WSM.PSRM.Current) ? (((module.WSM.VDInd.3.Calc=1) && (module.WSM.PSRM.Total=1)) ? (-2) : (module.WSM.VDInd.3.Calc-0.5)) : (module.WSM.VDInd.3.Calc-1))
+RegExpSubstitute=1
+Substitute="^-3$":"New-desktop | Switch-Desktop","^-2$":"","^(\d{0,})\.5$":"Remove-Desktop \1","^(\d){1,}$":"Switch-Desktop \1"
+DynamicVariables=1
+
+[Module.WSM.VDInd.4.Act]
+Group=module.WSM.PageCalc
+Measure=Calc
+Formula=((module.WSM.VDInd.4.Calc=module.WSM.PSRM.Current) ? (((module.WSM.VDInd.4.Calc=1) && (module.WSM.PSRM.Total=1)) ? (-2) : (module.WSM.VDInd.4.Calc-0.5)) : (module.WSM.VDInd.4.Calc-1))
 RegExpSubstitute=1
 Substitute="^-3$":"New-desktop | Switch-Desktop","^-2$":"","^(\d{0,})\.5$":"Remove-Desktop \1","^(\d){1,}$":"Switch-Desktop \1"
 DynamicVariables=1
@@ -144,8 +151,10 @@ y=#body.Padding#
 w=#module.WSM.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
-MouseOverAction=[!SetOption module.WSM.PageCalc.Current formula "(floor((module.WSM.VDScript.Current-1)/#module.WSM.NumIndicator#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
-MouseLeaveAction=[!SetOption module.WSM.PageCalc.Current formula "(floor((module.WSM.VDScript.Current-1)/#module.WSM.NumIndicator#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
+DynamicVariables=1
+MouseOverAction=[!SetOption module.WSM.PageCalc formula "(floor((module.WSM.PSRM.Current-1)/#module.WSM.NoInd#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
+MouseLeaveAction=[!SetOption module.WSM.PageCalc formula "(floor((module.WSM.PSRM.Current-1)/#module.WSM.NoInd#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
+MouseActionCursor=0
 
 [module.WSM.Control.PrevPage]
 Group=module.WSM.VDInd
@@ -154,7 +163,7 @@ w=(#module.WSM.Width#*0.5)
 h=#body.ElementSize#
 SolidColor=0,0,0,1
 Container=module.WSM.Container
-RightMouseUpAction=[!SetOption module.WSM.PageCalc.Current formula "[module.WSM.PageCalc.Prev]"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
+RightMouseUpAction=[!SetOption module.WSM.PageCalc formula "[module.WSM.PageCalc.Prev]"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
 
 [module.WSM.Control.NextPage]
 Group=module.WSM.VDInd
@@ -172,30 +181,18 @@ x=(#body.ElementSize#*-12/24)
 y=(#body.ElementSize#*12/24)
 Container=module.WSM.Container
 
-[module.WSM.VDInd.1]
+[Module.WSM.VDInd.1]
 MeterStyle=module.WSM.StyleVDInd
 Meter=String
-MeasureName=module.WSM.IndChar.1
-Container=module.WSM.Container
-LeftMouseUpAction=[!CommandMeasure module.WSM.VDScript "[Module.WSM.IndAct.1]"][!SetOption module.WSM.PageCalc.Current formula "(floor((module.WSM.VDScript.Current-1)/#module.WSM.NumIndicator#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
 
-[module.WSM.VDInd.2]
+[Module.WSM.VDInd.2]
 MeterStyle=module.WSM.StyleVDInd
 Meter=String
-MeasureName=module.WSM.IndChar.2
-Container=module.WSM.Container
-LeftMouseUpAction=[!CommandMeasure module.WSM.VDScript "[Module.WSM.IndAct.2]"][!SetOption module.WSM.PageCalc.Current formula "(floor((module.WSM.VDScript.Current-1)/#module.WSM.NumIndicator#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
 
-[module.WSM.VDInd.3]
+[Module.WSM.VDInd.3]
 MeterStyle=module.WSM.StyleVDInd
 Meter=String
-MeasureName=module.WSM.IndChar.3
-Container=module.WSM.Container
-LeftMouseUpAction=[!CommandMeasure module.WSM.VDScript "[Module.WSM.IndAct.3]"][!SetOption module.WSM.PageCalc.Current formula "(floor((module.WSM.VDScript.Current-1)/#module.WSM.NumIndicator#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]
 
 [module.WSM.VDInd.4]
 MeterStyle=module.WSM.StyleVDInd
 Meter=String
-MeasureName=module.WSM.IndChar.4
-Container=module.WSM.Container
-LeftMouseUpAction=[!CommandMeasure module.WSM.VDScript "[Module.WSM.IndAct.4]"][!SetOption module.WSM.PageCalc.Current formula "(floor((module.WSM.VDScript.Current-1)/#module.WSM.NumIndicator#))"][!UpdateMeasureGroup module.WSM.PageCalc][!UpdateMeterGroup module.WSM.VDInd][!Redraw]

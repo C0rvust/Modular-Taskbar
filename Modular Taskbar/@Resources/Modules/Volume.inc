@@ -1,6 +1,12 @@
+[Metadata]
+Name=Volume
+Description=Displays volume info. Click the icon to mute/unmute. Scroll on the text to change volume. Click the text to open popup; popup displays current audio device & volume slider. Click audio device to switch to next device. 
+
 [Variables]
-module.Volume.Position=1558
+module.Volume.Position=1356
 module.Volume.Anchor=2
+
+; Do not change
 module.Volume.Width=(2*#body.ElementSize#)
 
 [module.Volume.StyleIconString]
@@ -19,17 +25,24 @@ StringAlign=CenterCenter
 AntiAlias=1
 DynamicVariables=1
 
-[Module.Volume.Volume]
+[module.Volume.Main]
 Measure=Plugin
 Plugin=Win7AudioPlugin
 UpdateDivider=(1000/#UpdateInterval#)
-OnChangeAction=[!UpdateMeasure Module.Volume.VolumePercentage][!UpdateMeter module.Volume.VolumeDisplay][!Redraw]
+OnChangeAction=[!UpdateMeasureGroup module.Volume.calc][!UpdateMeterGroup module.Volume.Display][!Redraw]
 
-[Module.Volume.VolumePercentage]
+[module.Volume.VolumeCalc]
+Group=module.Volume.calc
 Measure=Calc
-Formula=Module.Volume.Volume
+Formula=module.Volume.Main
+Substitute="-1":"0"
+
+[module.Volume.VolumeDisplay]
+Group=module.Volume.calc
+Measure=Calc
+Formula=(module.Volume.Main<=0?0:(module.Volume.Main<50?1:2))
 RegExpSubstitute=1
-Substitute="^-1$|^0$":"Mute","(^\d{1,3}$)":"\1"
+Substitute="^(.*)$":"Volume\1"
 
 [module.Volume.Container]
 Meter=Image
@@ -38,22 +51,27 @@ y=#body.Padding#
 w=#module.Volume.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
-LeftMouseUpAction=[!CommandMeasure "Module.Volume.Volume" "ToggleMute"][!UpdateMeasure module.Volume.VolumeDisplay]
-MouseScrollUpAction=[!CommandMeasure "Module.Volume.Volume" "ChangeVolume 1"][!UpdateMeasure module.Volume.VolumeDisplay]
-MouseScrollDownAction=[!CommandMeasure "Module.Volume.Volume" "ChangeVolume -1"][!UpdateMeasure module.Volume.VolumeDisplay]
+DynamicVariables=1
+MouseActionCursor=0
+MouseScrollUpAction=[!CommandMeasure "Module.Volume.Main" "ChangeVolume 5"][!UpdateMeasure module.Volume.Main]
+MouseScrollDownAction=[!CommandMeasure "Module.Volume.Main" "ChangeVolume -5"][!UpdateMeasure module.Volume.Main]
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Volume_PopUp.ini"][!ActivateConfig "#ROOTCONFIG#\PopUp" "Volume_PopUp.ini"]
 
 [module.Volume.VolumeIcon]
+Group=module.Volume.Display
 MeterStyle=module.Volume.StyleIconString
 Meter=String
 x=(#body.ElementSize#*12/24)
 y=(#body.ElementSize#*12/24)
-Text=MI-Volume-MI
+MeasureName=module.Volume.VolumeDisplay
 Container=module.Volume.Container
+LeftMouseUpAction=[!CommandMeasure "Module.Volume.Main" "ToggleMute"][!UpdateMeasure module.Volume.Main]
 
-[module.Volume.VolumeDisplay]
+[module.Volume.VolumePercentage]
+Group=module.Volume.Display
 MeterStyle=module.Volume.StyleInfoString
 Meter=String
 x=(#body.ElementSize#*36/24)
 y=(#body.ElementSize#*12/24)
-MeasureName=Module.Volume.VolumePercentage
+MeasureName=Module.Volume.VolumeCalc
 Container=Module.Volume.Container
