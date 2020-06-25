@@ -24,7 +24,7 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
 
 **Key Functionalities:**
 
-- Open the Settings skin (accessible in context menu) to activate/deactivate & position modules.
+- Open the Settings skin (accessible in context menu) to activate/deactivate & to position modules.
 
 - Current modules include:
   - **Battery**
