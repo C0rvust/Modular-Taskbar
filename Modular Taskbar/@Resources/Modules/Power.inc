@@ -1,6 +1,12 @@
+[Metadata]
+Name=Power
+Description=Click to open options to shutdown device.
+
 [Variables]
-module.Power.Position=264
+module.Power.Position=46
 module.Power.Anchor=0
+
+; Do not change
 module.Power.Width=#body.ElementSize#
 
 [module.Power.StyleIconString]
@@ -18,13 +24,13 @@ y=#body.Padding#
 w=#module.Power.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
+DynamicVariables=1
 
 [module.Power.StartIcon]
 MeterStyle=module.Power.StyleIconString
 Meter=String
 x=(#body.ElementSize#*12/24)
 y=(#body.ElementSize#*12/24)
-Text=MI-PowerDown-MI
+Text=PowerDown
 Container=module.Power.Container
-RightMouseUpAction=[shutdown -a]
-LeftMouseDoubleClickAction=[shutdown -s -t 30]
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Power_PopUp.ini"][!ActivateConfig "#ROOTCONFIG#\PopUp" "Power_PopUp.ini"]
