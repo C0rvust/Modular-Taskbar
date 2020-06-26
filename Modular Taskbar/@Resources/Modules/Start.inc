@@ -34,7 +34,7 @@ h=#body.ElementSize#
 SolidColor=0,0,0
 DynamicVariables=1
 OnUpdateAction=[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Start_PopUp.ini"][!UpdateMeasure module.Start.PSRM]
-LeftMouseUpAction=#UpdateCoord#[!ActivateConfig "#RootCOnfig#\PopUp" "Start_PopUp.ini"]
+LeftMouseUpAction=#UpdateCoord#[!ToggleConfig "#RootCOnfig#\PopUp" "Start_PopUp.ini"]
 
 [module.Start.StartIcon]
 MeterStyle=module.Start.StyleIconString

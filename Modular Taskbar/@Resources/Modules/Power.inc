@@ -33,4 +33,4 @@ x=(#body.ElementSize#*12/24)
 y=(#body.ElementSize#*12/24)
 Text=PowerDown
 Container=module.Power.Container
-LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Power_PopUp.ini"][!ActivateConfig "#ROOTCONFIG#\PopUp" "Power_PopUp.ini"]
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Power_PopUp.ini"][!ToggleConfig "#ROOTCONFIG#\PopUp" "Power_PopUp.ini"]

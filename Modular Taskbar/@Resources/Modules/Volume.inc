@@ -55,7 +55,7 @@ DynamicVariables=1
 MouseActionCursor=0
 MouseScrollUpAction=[!CommandMeasure "Module.Volume.Main" "ChangeVolume 5"][!UpdateMeasure module.Volume.Main]
 MouseScrollDownAction=[!CommandMeasure "Module.Volume.Main" "ChangeVolume -5"][!UpdateMeasure module.Volume.Main]
-LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Volume_PopUp.ini"][!ActivateConfig "#ROOTCONFIG#\PopUp" "Volume_PopUp.ini"]
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Volume_PopUp.ini"][!ToggleConfig "#ROOTCONFIG#\PopUp" "Volume_PopUp.ini"]
 
 [module.Volume.VolumeIcon]
 Group=module.Volume.Display

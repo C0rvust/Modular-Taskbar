@@ -3,7 +3,7 @@ ElementSize=40
 Padding=10
 CornerRadius=6
 
-IntAreaWidth=257
+IntAreaWidth=250
 MEWidth=(#IntAreaWidth#-2*#Padding#)
 MEHeight=#ElementSize#
 ShownModules=6

@@ -42,7 +42,7 @@ w=#module.Battery.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
 DynamicVariables=1
-LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Battery_PopUp.ini"][!ActivateConfig "#ROOTCONFIG#\PopUp" "Battery_PopUp.ini"]
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Battery_PopUp.ini"][!ToggleConfig "#ROOTCONFIG#\PopUp" "Battery_PopUp.ini"]
 
 [module.Battery.BatteryIcon]
 MeterStyle=module.Battery.StyleIconString

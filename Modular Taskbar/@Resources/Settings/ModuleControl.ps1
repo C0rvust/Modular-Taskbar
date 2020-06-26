@@ -43,18 +43,6 @@ function IsModuleActive([String] $Module){
     return $False
 }
 
-# Return if a given module is active as a numerical value
-# This has proven to be redundant as PSRM already returns $True / $False as 1 / 0
-# function IsModuleActiveNum([String] $Module){
-	# $IsModuleActive=IsModuleActive($Module)
-	# If($IsModuleActive){
-		# return "1"
-	# }
-	# else {
-		# return "0"
-	# }
-# }
-
 # Activate a module
 function AddModule([String] $Module){
     $AvaliableModules=AvaliableModules

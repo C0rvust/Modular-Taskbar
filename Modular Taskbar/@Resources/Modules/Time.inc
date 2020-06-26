@@ -34,7 +34,7 @@ w=#Module.Time.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
 DynamicVariables=1
-LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Time_PopUp.ini"][!ActivateConfig "#ROOTCONFIG#\PopUp" "Time_PopUp.ini"]
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Time_PopUp.ini"][!ToggleConfig "#ROOTCONFIG#\PopUp" "Time_PopUp.ini"]
 
 [Module.Time.Display.Time]
 Group=Module.Time.Display
