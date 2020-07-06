@@ -3,7 +3,7 @@ Name=WSM
 Description=Displays virtual desktop info. Click a number to navigate to that workspace. Click the highlighted (current) workspace to remove it. Click a + sign to create new workspace. Right click on either end to jump to a new page.
 
 [Variables]
-module.WSM.Position=84
+module.WSM.Position=86
 module.WSM.Anchor=0
 
 ; Do not change
