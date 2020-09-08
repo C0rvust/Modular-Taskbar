@@ -47,7 +47,7 @@ Substitute="^(.*)$":"Volume\1"
 [module.Volume.Container]
 Meter=Image
 x=(#module.Volume.Position#-(#module.Volume.Anchor#*0.5)*#module.Volume.Width#)
-y=#body.Padding#
+y=((#body.Height#-#body.ElementSize#)/2)
 w=#module.Volume.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0

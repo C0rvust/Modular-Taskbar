@@ -37,7 +37,7 @@ OnChangeAction=[!UpdateMeterGroup Module.Battery.Display][!Redraw]
 [module.Battery.Container]
 Meter=Image
 x=(#module.Battery.Position#-(#module.Battery.Anchor#*0.5)*#module.Battery.Width#)
-y=#body.Padding#
+y=((#body.Height#-#body.ElementSize#)/2)
 w=#module.Battery.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0

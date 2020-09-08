@@ -16,9 +16,17 @@ Module.Time.Width=(#body.ElementSize#*2)
 InlineSetting=Face | #font.DisplayName#
 InlineSetting2=Size | #font.SizeStd#
 InlineSetting3=Color | #colour.2.Code#,#colour.2.Alpha#
+InlineSetting4=Color | #colour.2.Code#,(#colour.2.Alpha#*([Module.Time.Time.S]%2=0?0.5:1))
+InlinePattern4=:
 StringAlign=CenterCenter
 AntiAlias=1
 DynamicVariables=1
+
+[Module.Time.Time.S]
+Measure=Time
+Format=%S
+UpdateDivider=(1000/#UpdateInterval#)
+OnChangeAction=[!UpdateMeter Module.Time.Display.Time]
 
 [Module.Time.Time.HM]
 Measure=Time
@@ -29,7 +37,7 @@ OnChangeAction=[!UpdateMeter Module.Time.Display.Time]
 [Module.Time.Container]
 Meter=Image
 x=(#module.Time.Position#-(#module.Time.Anchor#*0.5)*#module.Time.Width#)
-y=#body.Padding#
+y=((#body.Height#-#body.ElementSize#)/2)
 w=#Module.Time.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
