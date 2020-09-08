@@ -147,7 +147,7 @@ DynamicVariables=1
 [module.WSM.Container]
 Meter=Image
 x=(#module.WSM.Position#-(#module.WSM.Anchor#*0.5)*#module.WSM.Width#)
-y=#body.Padding#
+y=((#body.Height#-#body.ElementSize#)/2)
 w=#module.WSM.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0

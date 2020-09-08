@@ -20,7 +20,7 @@ DynamicVariables=1
 [Module.Power.Container]
 Meter=Image
 x=(#module.Power.Position#-(#module.Power.Anchor#*0.5)*#module.Power.Width#)
-y=#body.Padding#
+y=((#body.Height#-#body.ElementSize#)/2)
 w=#module.Power.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0

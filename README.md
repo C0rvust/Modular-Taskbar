@@ -3,7 +3,7 @@ A Rainmeter skin that acts as a taskbar replacement.
 
 This skin **does not** effect your stock Windows Taskbar in any way; should you choose to remove it (by whatever means avaliable) is your freedom.
 
-The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](https://www.rainmeter.net/).
+The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](https://www.rainmeter.net/).
 
 ![Preview](https://user-images.githubusercontent.com/40166216/85740354-24b14080-b734-11ea-85df-66ca4a1e79e0.png)
 
@@ -43,7 +43,8 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3338](
     - Provides volume information
   - **WSM**
     - Manage your virtual desktops
-
+  - **Taskbar**
+    - Manage your active processes
+  
 - Modules planned:
   - **Weather**
-  - **ActiveWindow**

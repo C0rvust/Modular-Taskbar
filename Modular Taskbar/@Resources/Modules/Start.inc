@@ -23,18 +23,17 @@ Plugin=PowerShellRM
 ScriptFile=#@#Includes\Start\Generate.ps1
 DynamicVariables=1
 IfCondition=#CurrentSection#=0
-IfFalseAction=[!WriteKeyValue Variables Module.Start.ItemSlots "[#CurrentSection#]" "#RootConfigPath#\PopUp\Start_PopUp.ini"]
+IfFalseAction=[!WriteKeyValue Variables Module.Start.NumProgram "[#CurrentSection#]" "#RootConfigPath#\PopUp\Start_PopUp.ini"]
 
 [module.Start.Container]
 Meter=Image
 x=(#module.Start.Position#-(#module.Start.Anchor#*0.5)*#module.Start.Width#)
-y=#body.Padding#
+y=((#body.Height#-#body.ElementSize#)/2)
 w=#module.Start.Width#
 h=#body.ElementSize#
 SolidColor=0,0,0
 DynamicVariables=1
-OnUpdateAction=[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Start_PopUp.ini"][!UpdateMeasure module.Start.PSRM]
-LeftMouseUpAction=#UpdateCoord#[!ToggleConfig "#RootCOnfig#\PopUp" "Start_PopUp.ini"]
+LeftMouseUpAction=#UpdateCoord#[!WriteKeyValue Variables Parent.Position "([#CurrentSection#:x]+[#CurrentSection#:w]/2)" "#RootConfigPath#\PopUp\Start_PopUp.ini"][!ToggleConfig "#RootCOnfig#\PopUp" "Start_PopUp.ini"]
 
 [module.Start.StartIcon]
 MeterStyle=module.Start.StyleIconString
