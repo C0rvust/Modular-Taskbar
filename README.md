@@ -12,7 +12,7 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](
 
 ---
 
-**Requirements**
+# **Requirements**
 
 - [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter) Follow the [installation instructions](https://github.com/khanhas/MagickMeter#how-to-install). Used for image processing.
 
@@ -24,27 +24,18 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](
 
 ---
 
-**Key Functionalities:**
+# **Features**
 
-- Open the Settings skin (accessible in context menu) to activate/deactivate & to position modules.
+- **Taskbar** - Track and display active & pinned processes, as well as subprocesses.
+- **WSM** - Manage your virtual desktops.
+- **NowPlaying** - Control and recieve info from your music player.
+- **Time** - Basic clock, and a calendar with event tracking.
+- **Battery** - Battery information and uptime tracking.
+- **Power** - Options for powering down.
+- **Start** - Compact launcher for a handful of apps.
+- **Volume** - Control volume and audio devices.
 
-- Current modules include:
-  - **Battery**
-    - Provides battery information
-  - **Clock**
-    - Provides information for current time and date
-  - **NowPlaying**
-    - Provides information for music info
-  - **Power**
-    - Provides options for powering down
-  - **Start**
-    - Provides accessible shortcuts
-  - **Volume**
-    - Provides volume information
-  - **WSM**
-    - Manage your virtual desktops
-  - **Taskbar**
-    - Manage your active processes
-  
-- Modules planned:
-  - **Weather**
+- Setting skins to adjust preferences.
+
+# **Screenshots**
+
