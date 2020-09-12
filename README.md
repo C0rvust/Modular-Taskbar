@@ -7,9 +7,6 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](
 
 [Download here](https://github.com/C0rvust/Modular-Taskbar/releases).
 
-
----
-
 # **Requirements**
 
 - [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter) - Follow the [installation instructions](https://github.com/khanhas/MagickMeter#how-to-install). Used for image processing.
@@ -19,8 +16,6 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](
 - [Spicetify-CLI | khanhas](https://github.com/khanhas/spicetify-cli) - Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Required only if you use spotify.
 
 - [PowershellRM | Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Follow the [update instructions](https://github.com/khanhas/PowershellRM#requirements) to update your powershell version. A version update is required only for win 7 users; no further actions are required by win 10 users.
-
----
 
 # **Features**
 
