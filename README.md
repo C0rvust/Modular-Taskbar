@@ -5,8 +5,6 @@ This skin **does not** effect your stock Windows Taskbar in any way; should you 
 
 The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](https://www.rainmeter.net/).
 
-![Preview](https://user-images.githubusercontent.com/40166216/92535281-c83bc880-f22e-11ea-999d-ada7cd480b1f.png)
-
 [Download here](https://github.com/C0rvust/Modular-Taskbar/releases).
 
 
@@ -39,3 +37,4 @@ The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](
 
 # **Screenshots**
 
+![Preview](https://user-images.githubusercontent.com/40166216/92535281-c83bc880-f22e-11ea-999d-ada7cd480b1f.png)
