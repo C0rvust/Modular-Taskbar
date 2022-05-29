@@ -1,4 +1,7 @@
 # Modular-Taskbar
+
+## This skin is under maintenence; just waiting for some auxilary stuff to get fixed. New version TBD.
+
 A Rainmeter skin that acts as a taskbar replacement. 
 
 This skin **does not** effect your stock Windows Taskbar in any way; should you choose to remove it (by whatever means avaliable) is your freedom.
