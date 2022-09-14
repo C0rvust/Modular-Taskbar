@@ -5,7 +5,11 @@ Modular Taskbar is a rainmeter skin replicating the functions of the stock windo
 The latest release of Modular Taskbar can be found [here](https://github.com/C0rvust/Modular-Taskbar/releases). Simply run the `.rmskin` file once downloaded.
 
 # Preview
+## Taskbar
+<img src="Assets/Overview1.png" width="100%"/>
 
+## Setting Menu
+<img src="Assets/Overview2.png" width="100%"/>
 
 # Requirements
 
