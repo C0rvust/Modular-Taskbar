@@ -1,38 +1,71 @@
-# Modular-Taskbar
+# Modular Taskbar
+Modular Taskbar is a rainmeter skin replicating the functions of the stock windows taskbar, equipped with an array of modules that can be swapped in and out at ease. Modular Taskbar requires the Rainmeter application (minimum version _4.5.14.3663_), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
 
-## This skin is under maintenence; just waiting for some auxilary stuff to get fixed. New version TBD.
+# Installing
+The latest release of Modular Taskbar can be found [here](https://github.com/C0rvust/Modular-Taskbar/releases). Simply run the `.rmskin` file once downloaded.
 
-A [Rainmeter](https://www.rainmeter.net/) skin that acts as a taskbar replacement. 
+# Preview
 
-This skin **does not** effect your stock Windows Taskbar in any way; should you choose to remove it (by whatever means avaliable) is your freedom.
 
-The minimum required version of Rainmeter is version [4.4 Beta Release - r3382](https://www.rainmeter.net/).
+# Requirements
 
-[Download here](https://github.com/C0rvust/Modular-Taskbar/releases).
+- [MagickMeter by khanhas](https://github.com/khanhas/MagickMeter) - Follow these [instructions](https://github.com/khanhas/MagickMeter#how-to-install) to install the parent application ImageMagick.
 
-# **Requirements**
+- [WebNowPlaying by tjhrulz](https://github.com/tjhrulz/WebNowPlaying) - Follow these [instructions](https://github.com/tjhrulz/WebNowPlaying#extension-links) to install the browser extension. 
 
-- [MagickMeter | khanhas](https://github.com/khanhas/MagickMeter) - Follow the [installation instructions](https://github.com/khanhas/MagickMeter#how-to-install). Used for image processing.
+- [Spicetify-CLI by khanhas](https://github.com/khanhas/spicetify-cli) - Follow these [instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user) to install Spicetify-CLI.
 
-- [WebNowPlaying | tjhrulz](https://github.com/tjhrulz/WebNowPlaying) - Follow the [installation instructions](https://github.com/tjhrulz/WebNowPlaying#extension-links) for the browser extension. 
+- [PowershellRM by Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Follow these [instructions](https://github.com/khanhas/PowershellRM#requirements) to update your powershell version. _A version update is required only for win 7 users; no further actions are required by win 10 users._
 
-- [Spicetify-CLI | khanhas](https://github.com/khanhas/spicetify-cli) - Follow the [installtion instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user). Required only if you use spotify.
+# Features
+## Modules
+Modular Taskbar is equipped with an array of modules that can be customized via a setting menu. Some modules are equipped with a secondary popup skin, which can be summoned by clicking within the bounds of the module's tile.
 
-- [PowershellRM | Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Follow the [update instructions](https://github.com/khanhas/PowershellRM#requirements) to update your powershell version. A version update is required only for win 7 users; no further actions are required by win 10 users.
+### Battery
+- Provides information about battery% and device uptime.
+- Equipped with a brightness slider.
 
-# **Features**
+### NowPlaying
+- Provides information about currently playing media/music from media players.
+- Equipped with media controls.
 
-- **Taskbar** - Track and display active & pinned processes, as well as subprocesses.
-- **WSM** - Manage your virtual desktops.
-- **NowPlaying** - Control and recieve info from your music player.
-- **Time** - Basic clock, and a calendar with event tracking.
-- **Battery** - Battery information and uptime tracking.
-- **Power** - Options for powering down.
-- **Start** - Compact launcher for a handful of apps.
-- **Volume** - Control volume and audio devices.
+The module tile contains a scrolling display which displays media information. Hovering over the tile brings up context buttons for media control. Bringing up the popup produces a mini player, containing a progress bar and an album art display. 
 
-- Setting skins to adjust preferences.
+### Power
+- Equipped with a power option control menu.
 
-# **Screenshots**
+The popup contains a menu of context buttons for various power options.
 
-![Preview](https://user-images.githubusercontent.com/40166216/92535281-c83bc880-f22e-11ea-999d-ada7cd480b1f.png)
+### Shortcut
+- Equipped with a user-defined shortcut menu.
+
+The list of shortcuts can be managed via the context buttons or by bringing up the context menu within the popup.
+
+### Taskbar
+- Provides information about active processes.
+- Equipped with controls for such processes.
+
+The module tile displays a bar of icons of currently active processes as well as any pinned processes. Clicking the icon brings forth the first child process window; right clicking the icon pins/unpins the process; middle clicking the icon opens a new child window. Hovering over each icon summons the popup, containing the list of child processes of that parent process; a particular child process window can be brought forth by clicking a child title, or closed via the context buttons.
+
+### Time
+- Provides information about time and date.
+
+The module tile displays current time. A calendar popup can be summoned, which can be navigated via the context buttons.
+
+### Volume
+- Provides information about volume and audio devices.
+- Equipped with a volume controller and audio device controller.
+
+Clicking the volume icon on the module title mutes/unmutes audio; scrolling on the module tile roughly changes the volume. Summoning the popup brings forth a volume slider allowing for finer control, and the current audio device, which can be cycled through via the context buttons.
+
+## Setting Menu
+
+A setting menu can be summoned via the context menu. Right click the taskbar, and click `Edit Settings`. You will be greated with two pages of settings, which can be navigated via the sidebar.
+
+### Module Settings
+A list of all avaliable modules are shown, as well as their active status. Each module is accompanied with a context button which opens a list of all variables associated with that module avaliable for customization. To edit each variable, simply click the variable value on the right, enter your desired value, and hit enter.
+
+You can return to the previous page containing all modules via the context button at the bottom left.
+
+### General Settings
+A list of general variables associated with the skin are shown. As with above, to edit each variable, simply click the variable value on the right, enter your desired value, and hit enter.
