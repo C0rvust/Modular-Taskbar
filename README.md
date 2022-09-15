@@ -3,11 +3,12 @@ Modular Taskbar is a [rainmeter](https://www.rainmeter.net/) skin replicating th
 
 # Installing
 The latest release of Modular Taskbar can be found [here](https://github.com/C0rvust/Modular-Taskbar/releases). Simply run the `.rmskin` file once downloaded.
-Modular Taskbar requires the Rainmeter application (minimum version _4.5.14.3663_), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
+Modular Taskbar requires the Rainmeter application (minimum version `4.5.14.3663`), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
 
 # Preview
-<img src="Assets/Overview1.png" width="100%"/>
-<img src="Assets/Overview2.png" width="100%"/>
+<img src="Assets/Overview3.png" width="100%"/>
+<img src="Assets/Overview4.png" width="100%"/>
+<img src="Assets/Overview5.png" width="100%"/>
 
 # Requirements
 
@@ -17,7 +18,7 @@ Modular Taskbar requires the Rainmeter application (minimum version _4.5.14.3663
 
 - [Spicetify-CLI by khanhas](https://github.com/khanhas/spicetify-cli) - Follow these [instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user) to install Spicetify-CLI. _If you don't use Spotify, no further actions are required._
 
-- [PowershellRM by Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Follow these [instructions](https://github.com/khanhas/PowershellRM#requirements) to update your powershell version. _A version update is required only for win 7 users; no further actions are required by win 10 users._
+- [PowershellRM by Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Follow these [instructions](https://github.com/khanhas/PowershellRM#requirements) to update your powershell version (Version `3.x` or above). _As Win 10 is shipped with Powershell_ `5.1`_, no further actions are required by Win 10 users; update is required only for Win 7 users._
 
 # Features
 ## Modules
