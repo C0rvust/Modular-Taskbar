@@ -1,8 +1,9 @@
 # Modular Taskbar
-Modular Taskbar is a rainmeter skin replicating the functions of the stock windows taskbar, equipped with an array of modules that can be swapped in and out at ease. Modular Taskbar requires the Rainmeter application (minimum version _4.5.14.3663_), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
+Modular Taskbar is a [rainmeter](https://www.rainmeter.net/) skin replicating the functions of the stock windows taskbar, equipped with an array of modules that can be swapped in and out at ease. 
 
 # Installing
 The latest release of Modular Taskbar can be found [here](https://github.com/C0rvust/Modular-Taskbar/releases). Simply run the `.rmskin` file once downloaded.
+Modular Taskbar requires the Rainmeter application (minimum version _4.5.14.3663_), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
 
 # Preview
 ## Taskbar
