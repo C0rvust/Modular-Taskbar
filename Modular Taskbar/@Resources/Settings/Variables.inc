@@ -1,22 +1,35 @@
 [Variables]
-ElementSize=40
-Padding=10
-CornerRadius=6
+Element=30
+Corner=6
+Padding=8
+TopBarWidth=#Element#
+SideBarWidth=(#Element#+2*#Padding#)
 
-IntAreaWidth=250
-MEWidth=(#IntAreaWidth#-2*#Padding#)
-MEHeight=#ElementSize#
-ShownModules=6
-IntAreaHeight=(#Padding#+#ShownModules#*(#MEHeight#+#Padding#))
+; Background
+Colour.Background=245,245,245
+Colour.Background.Alpha=255
+; Foreground
+Colour.Foreground=238,238,238
+Colour.Foreground.Alpha=255
+; SideBar
+Colour.SideBar=195,195,255
+Colour.SideBar.Alpha=255
+; TopBar
+Colour.TopBar=140,140,255
+Colour.TopBar.Alpha=255
+; Element
+Colour.Element=65,65,65
+Colour.Element.Alpha=255
+; Highlight
+Colour.Highlight=110,110,110
+Colour.Highlight.Alpha=255
 
-LineWidth=4
-IntAreaHeaderWidth=80
-IntAreaButtonWidth=160
+; -------------------------------------
 
-Skin.Width=(2*#IntAreaWidth#+4*#LineWidth#+9*#Padding#)
-Skin.Height=700
+; Adjustable but not recommended
+Font.Display=Inconsolata
+Font.DisplayS=(#Element#*1/3)
 
-IntScrollSpeed=5
-
-Colour.1=225,63,63
-Colour.2=255,255,255
+; Do not adjust
+Font.Icon=MaterialIcon
+Font.IconS=(#Element#*0.75)

@@ -1,40 +1,43 @@
 [Variables]
-; Adjust as necessary
-body.ElementSize=30
-body.Padding=8
-body.CornerRadius=6
+; vargen|Element size|General|int|0:
+Body.Element=30
+; vargen|Element padding|General|int|0:
+Body.Padding=8
+; vargen|Taskbar width|General|int|0:
+Body.Width=1500
+Body.Height=(#Body.Element#+2*#Body.Padding#)
+; vargen|Corner size|General|int|0:
+Body.Corner=6
+; vargen|PopUp gap|General|int|0:
+Body.PopUp=5
 
-; -------------------------------------
-
-; Adjust as necessary
 ; Background
-colour.1.Code=25,25,25
-colour.1.Alpha=255
-; Element
-colour.2.Code=200,200,200
-colour.2.Alpha=255
-; Highlight
-colour.3.Code=220,220,220
-colour.3.Alpha=20
+; vargen|Background colour|General|rgb
+Colour.1=214,192,197
+; vargen|Background alpha|General|int|0:255
+Colour.1.Alpha=255
 
-; -------------------------------------
+; Element
+; vargen|Element colour|General|rgb
+Colour.2=214,85,113
+; vargen|Element alpha|General|int|0:255
+Colour.2.Alpha=255
+
+; Highlight
+; vargen|Highlight colour|General|rgb
+Colour.3=216,0,46
+; vargen|Highlight alpha|General|int|0:255
+Colour.3.Alpha=255
+
 
 ; Adjustable but not recommended
-font.DisplayName=Inconsolata
-font.SizeStd=(#body.ElementSize#*1/3)
+Font.Display=Inconsolata
+Font.DisplayS=(#Body.Element#*1/3)
 
 ; Do not adjust
-font.IconName=MaterialIcon
-
-; -------------------------------------
-
-; Adjust as necessary
-body.PopUpGap=5
-body.Width=1500
+Font.Icon=MaterialIcon
+Font.IconS=(#Body.Element#*0.75)
 
 ; Do not adjust
-body.Verticality=0
-body.X=210
-body.Y=0
-body.Height=(#body.ElementSize#+#body.Padding#*2)
-ActiveModules=Battery,Power,Start,Time,Volume,WSM,NowPlaying
+Body.X=258
+Body.Y=0
