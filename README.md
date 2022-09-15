@@ -6,10 +6,7 @@ The latest release of Modular Taskbar can be found [here](https://github.com/C0r
 Modular Taskbar requires the Rainmeter application (minimum version _4.5.14.3663_), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
 
 # Preview
-## Taskbar
 <img src="Assets/Overview1.png" width="100%"/>
-
-## Setting Menu
 <img src="Assets/Overview2.png" width="100%"/>
 
 # Requirements
