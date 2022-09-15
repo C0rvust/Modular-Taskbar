@@ -18,7 +18,7 @@ Modular Taskbar requires the Rainmeter application (minimum version _4.5.14.3663
 
 - [WebNowPlaying by tjhrulz](https://github.com/tjhrulz/WebNowPlaying) - Follow these [instructions](https://github.com/tjhrulz/WebNowPlaying#extension-links) to install the browser extension. 
 
-- [Spicetify-CLI by khanhas](https://github.com/khanhas/spicetify-cli) - Follow these [instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user) to install Spicetify-CLI.
+- [Spicetify-CLI by khanhas](https://github.com/khanhas/spicetify-cli) - Follow these [instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user) to install Spicetify-CLI. _If you don't use Spotify, no further actions are required._
 
 - [PowershellRM by Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Follow these [instructions](https://github.com/khanhas/PowershellRM#requirements) to update your powershell version. _A version update is required only for win 7 users; no further actions are required by win 10 users._
 
@@ -65,10 +65,10 @@ Clicking the volume icon on the module title mutes/unmutes audio; scrolling on t
 
 ## Setting Menu
 
-A setting menu can be summoned via the context menu. Right click the taskbar, and click `Edit Settings`. You will be greated with two pages of settings, which can be navigated via the sidebar.
+A setting menu can be summoned via the context menu. Right click the taskbar, and click `Edit Settings`. You can navigate the menu via the sidebar.
 
 ### Module Settings
-A list of all avaliable modules are shown, as well as their active status. Each module is accompanied with a context button which opens a list of all variables associated with that module avaliable for customization. To edit each variable, simply click the variable value on the right, enter your desired value, and hit enter.
+A list of all available modules are shown, as well as their active status. Each module is accompanied with a context button which opens a list of all variables associated with that module available for customization. To edit each variable, simply click the variable value on the right, enter your desired value, and hit enter.
 
 You can return to the previous page containing all modules via the context button at the bottom left.
 
