@@ -61,16 +61,16 @@ The module tile displays current time. A calendar popup can be summoned, which c
 - Provides information about volume and audio devices.
 - Equipped with a volume controller and audio device controller.
 
-Clicking the volume icon on the module title mutes/unmutes audio; scrolling on the module tile roughly changes the volume. Summoning the popup brings forth a volume slider allowing for finer control, and the current audio device, which can be cycled through via the context buttons.
+Clicking the volume icon on the module title toggles audio between mutes/unmute; scrolling on the module tile roughly changes the volume. Summoning the popup brings forth a volume slider allowing for finer control, and the current audio device, which can be cycled through via the context buttons.
 
 ## Setting Menu
 
 A setting menu can be summoned via the context menu. Right click the taskbar, and click `Edit Settings`. You can navigate the menu via the sidebar.
 
 ### Module Settings
-A list of all available modules are shown, as well as their active status. Each module is accompanied with a context button which opens a list of all variables associated with that module available for customization. To edit each variable, simply click the variable value on the right, enter your desired value, and hit enter.
+A list of all available modules are shown, as well as their active status. Clicking the `Active`/`Inactive` tile toggles the module between each. Each module is accompanied with a context button which opens a list of all variables associated with that module available for customization. To edit a variable, simply click the variable value tile on the right, enter your desired value, and hit enter.
 
 You can return to the previous page containing all modules via the context button at the bottom left.
 
 ### General Settings
-A list of general variables associated with the skin are shown. As with above, to edit each variable, simply click the variable value on the right, enter your desired value, and hit enter.
+A list of general variables associated with the skin are shown. As with above, to edit a variable, simply click the variable value tile on the right, enter your desired value, and hit enter.
