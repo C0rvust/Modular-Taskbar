@@ -1,9 +1,16 @@
+$RootConfig=$RmAPI.VariableStr("RootConfig")
+$Resources=$RmAPI.VariableStr("@")
+# $VariablesFile=$RmAPI.VariableStr("@") + "Variables.inc"
+$ModuleListFile=$RmAPI.VariableStr("@") + "ModuleList.inc"
+$ModuleFolder=$RmAPI.VariableStr("@") + "Modules"
+$SettingsFolder=$RmAPI.VariableStr("@") + "Settings"
 
 # ==========================================================================
 # Functions for setting menu navigation
 # ==========================================================================
 
-function MoveLabel { # Moves sidebar button label with appropriate text and location
+function MoveLabel { 
+    # Moves sidebar button label with appropriate text and location
     Param([int] $Location,
     [string] $LabelText)
     
@@ -34,14 +41,8 @@ function HideLabel { # Hides sidebar button label
 # Functions for retrieving data from variables.inc and module info
 # ==========================================================================
 
-$RootConfig=$RmAPI.VariableStr("RootConfig")
-$VariablesFile=$RmAPI.VariableStr("@") + "Variables.inc"
-$ModuleListFile=$RmAPI.VariableStr("@") + "ModuleList.inc"
-$ModuleFolder=$RmAPI.VariableStr("@") + "Modules"
-$SettingsFolder=$RmAPI.VariableStr("@") + "Settings"
-
-# Lists avaliable modules 
 function AvaliableModules {
+    # Lists avaliable modules 
     $AvaliableModules=@()
     $Dest=$ModuleFolder
     Get-ChildItem $Dest -Directory | ForEach-Object {
@@ -54,15 +55,15 @@ function AvaliableModules {
     return $AvaliableModules
 }
 
-# Lists currently active modules
-# https://stackoverflow.com/questions/50843357/returning-arraylist-from-function-script
 function GetActiveModules {
+    # Lists currently active modules
+    # https://stackoverflow.com/questions/50843357/returning-arraylist-from-function-script
     $Dest=$ModuleListFile
     $Content = [System.Collections.Arraylist]((Get-Content $Dest -Raw) -split [Environment]::NewLine)
     try {$Content.RemoveAt(0)} catch {}
 
     $ActiveModules = [System.Collections.Arraylist]@()
-    $Content | %{
+    $Content | ForEach-Object{
         if ($_) {
             [void]$ActiveModules.Add(($_ -replace '^.*\\(.*?)\.inc','$1'))
         }
@@ -70,8 +71,8 @@ function GetActiveModules {
     return ,$ActiveModules
 }
 
-# Returns if a module is active
 function IsModuleActive {
+    # Returns if a module is active
     Param($Module)
 
     $ActiveModules=GetActiveModules
@@ -83,9 +84,9 @@ function IsModuleActive {
     return $False
 }
 
-# Activates a module if it exists and is inactive
 function AddModule {
     Param($Module)
+    # Activates a module if it exists and is inactive
 
     $ActiveModules=GetActiveModules
 
@@ -102,9 +103,9 @@ function AddModule {
     }
 }
 
-# Deactivates a module if it exists and is active
 function RemoveModule {
     Param($Module)
+    # Deactivates a module if it exists and is active
 
     $ActiveModules=GetActiveModules
 
@@ -132,8 +133,8 @@ function ToggleModule {
     }
 }
 
-# Retrieves the active modules and write them as a list of @Include files @ ModuleList.inc
 function WriteActiveModules {
+    # Retrieves the active modules and write them as a list of @Include files @ ModuleList.inc
     Param([Array] $ActiveModules)
 
     $Content="[ModuleList]"
@@ -148,8 +149,8 @@ function WriteActiveModules {
     $Content | Out-File -FilePath $ModuleListFile
 }
 
-# Generates an @include file which contains a framework for the interactable elements of the setting skin
 function GenerateInteractableField {
+    # Generates an @include file which contains a framework for the interactable elements of the setting skin
     Param([Int] $NumInteractable)
 
     $Dest = "$SettingsFolder\Interactable.inc"
@@ -242,37 +243,65 @@ LeftMouseUpAction=[]
 # Each array contains 6 elements: "Desc","Group","Type","Bound","Name","Value"
 # Can be accessed as $Final[0]["Value"] etc
 # https://stackoverflow.com/questions/42612241/output-multiple-regex-matches-to-another-array-using-powershell
-function GenerateInteractableData {
-    Param([String] $Page)
+# function GenerateInteractableData2 {
+#     Param([String] $Page)
 
-    switch($Page) {
-        "General" {
-            $File=$VariablesFile
-        }
-        default {
-            $File="$ModuleFolder\$Page\Include\Variables.inc"
-        }
-    }
+#     switch($Page) {
+#         "General" {
+#             $File=$VariablesFile
+#         }
+#         default {
+#             $File="$ModuleFolder\$Page\Include\Variables.inc"
+#         }
+#     }
+
+#     $regexmatch="; vargen\|.*$" # Pattern to fish out all the matching results
+#     $regexparse="; vargen(?(?=\|)\|(?<Desc>[^\|\n\r]*)|)(?(?=\|)\|(?<Group>[^\|\n\r]*)|)(?(?=\|)\|(?<Type>[^\|\n\r]*)|)(?(?=\|)\|(?<Bound>[^\|\n\r]*)|)[\W]*(?<Name>.*?)=(?<Value>.*)" # Pattern to parse out relevant information from within the result
+
+#     $Lines=@() # Create an array for all matching results
+#     $Content=Get-Content $File | select-string -pattern $regexmatch -context 0,1 # Find $regexmatch, copy the line, the 0 line(s) above and the 1 line(s) below; Each result is an array in $Content
+#     foreach ($Line in $Content) {
+#         $Line=$Line.ToString() -replace '^([^;]*)','' # Converts each result to a string, then rids the leading " > " 
+#         $Lines+=$Line
+#     }
+#     $Final=@() # Create an array for all relevant information
+#     foreach ($Result in $Lines) {
+#         $Result -match $regexparse > $null # Parses the result and produces each relevant information
+#         $Final += $Matches # Here, $Matches is implicitly created from the regex match
+#     }
+#     return $Final
+# }
+
+function GenerateInteractableData {
+    # Pulls all relevant variables from the skin folder, and compiles an array of all relevant data
+    # ; vargen|"Desc"|"Group"|"Type"|"Bound"
+    # : "Name"="Value"
+    # Returns an array $Final, each element is the data array of one variable
+    # Each array contains 6 elements: "Desc","Group","Type","Bound","Name","Value"
+    # Can be accessed as $Final[0]["Value"] etc
+    # https://stackoverflow.com/questions/42612241/output-multiple-regex-matches-to-another-array-using-powershell
+    Param([String] $Group)
 
     $regexmatch="; vargen\|.*$" # Pattern to fish out all the matching results
     $regexparse="; vargen(?(?=\|)\|(?<Desc>[^\|\n\r]*)|)(?(?=\|)\|(?<Group>[^\|\n\r]*)|)(?(?=\|)\|(?<Type>[^\|\n\r]*)|)(?(?=\|)\|(?<Bound>[^\|\n\r]*)|)[\W]*(?<Name>.*?)=(?<Value>.*)" # Pattern to parse out relevant information from within the result
+    $ConfigFiles=Get-ChildItem -Path $Resources -Recurse | Where-Object Name -Match ".inc$|.ini$" | Where-Object {$_.FullName -notlike "$($Resources)Settings*"}
 
-    $Lines=@() # Create an array for all matching results
-    $Content=Get-Content $File | select-string -pattern $regexmatch -context 0,1 # Find $regexmatch, copy the line, the 0 line(s) above and the 1 line(s) below; Each result is an array in $Content
-    foreach ($Line in $Content) {
-        $Line=$Line.ToString() -replace '^([^;]*)','' # Converts each result to a string, then rids the leading " > " 
-        $Lines+=$Line
-    }
-    $Final=@() # Create an array for all relevant information
-    foreach ($Result in $Lines) {
-        $Result -match $regexparse > $null # Parses the result and produces each relevant information
-        $Final += $Matches # Here, $Matches is implicitly created from the regex match
+    $Final=@()
+    $ConfigFiles | ForEach-Object {
+        $Content=Get-Content $_.FullName | select-string -pattern $regexmatch -context 0,1 # Find $regexmatch, copy the line, the 0 line(s) above and the 1 line(s) below; Each result is an array in $Content
+        foreach ($Line in $Content) {
+            $Line=$Line.ToString() -replace '^([^;]*)','' # Converts each result to a string, then rids the leading " > " 
+            $Line -match $regexparse > $null # Parses the result and produces each relevant information
+            if($Matches["Group"] -eq $Group) { # Here, $Matches is implicitly created from the regex match above
+                $Final += ($Matches + @{Path=$_.FullName}) # Adding the file path of the variable into the match result for later referencing
+            }
+        }
     }
     return $Final
 }
 
-# Takes the relevant variables, and sets the labels and values of the relevant meters
 function SetInteractableData {
+    # Takes the relevant variables, and sets the labels and values of the relevant meters
     Param([String] $Page)
 
     Switch -Regex ($Page) {
@@ -292,7 +321,7 @@ function SetInteractableData {
                 $RmAPI.Bang("!HideMeter `"`"`"Button.$i`"`"`" ")
                 $RmAPI.Bang("!SetOption Label.$i Text `"`"`"$($Data[$i]["Desc"])`"`"`" ")
                 $RmAPI.Bang("!SetOption Value.$i Text `"`"`"$($Data[$i]["Value"])`"`"`" ")
-                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"`"`"$`UserInput$`"`"`"`"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=$($Data[$i]["Value"]) `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
+                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"$($Data[$i]["Path"])`" `'$`UserInput$`' `"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=$($Data[$i]["Value"]) `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
             }
             $RmAPI.Bang("!UpdateMeterGroup `"`"`"Interactable`"`"`" ")
             $RmAPI.Bang("!Redraw")
@@ -334,7 +363,7 @@ function SetInteractableData {
                 $RmAPI.Bang("!HideMeter `"`"`"Button.$i`"`"`" ")
                 $RmAPI.Bang("!SetOption Label.$i Text `"`"`"$($Data[$i]["Desc"])`"`"`" ")
                 $RmAPI.Bang("!SetOption Value.$i Text `"`"`"$($Data[$i]["Value"])`"`"`" ")
-                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"`"`"$`UserInput$`"`"`"`"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=$($Data[$i]["Value"]) `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
+                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"$($Data[$i]["Path"])`" `'$`UserInput$`' `"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=$($Data[$i]["Value"]) `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
             }
             $RmAPI.Bang("!ShowMeter `"`"`"Setting.ButtonReturn`"`"`" ")
             $RmAPI.Bang("!SetOption `"`"`"Setting.ButtonReturn`"`"`" LeftMouseUpAction `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"SetInteractableData Modules`"`"`"] `"`"`" ")
@@ -346,56 +375,55 @@ function SetInteractableData {
 }
 
 function ValidateVariableInput {
-    Param([String] $Page,
-    [String] $VariableID,
-    [String] $NewInput)
+    Param([String] $Page, # Page of setting skin that should be refreshed
+    [String] $VariableID, # ID of variable in the data set
+    [String] $File, # File which this variable can be found
+    [String] $NewInput) # The new value of the variable that is being validated
 
-    $NewInput = $NewInput.Trim('"') # Trim '"", artifact left by inputtext
-
-    $File="" # Correlate correct variable file loc
-    if($Page -match "General") {
-        $File=$VariablesFile
-    }
-    else {
-        $File="$ModuleFolder\$Page\Include\Variables.inc"
-    }
+    $NewInput = $NewInput.Trim('"') # Trim '"", artifact left by inputtext plugin
 
     $Data=GenerateInteractableData $Page # Retrieve variable bounds and type
     $Bound=$Data[$VariableID]['Bound']
     $Type=$Data[$VariableID]['Type']
 
-    if($NewInput) { # Check if Input is null
-        switch($Type) { # Sort according to supposed variable type for sainity check
-            "rgb" {
-                # Validate type and bounds
-                $Length=0
-                $($NewInput -split ",") | ForEach-Object { if($_ -In 0..255) {$Length += 1}} # Splits input into xxx,xxx,xxx , check if each of the three numbers are between 0 & 255
-                if($Length -ne 3) {
-                    return
-                }
-            }
-            "int" {
-                # Validate type
-                $NewInput -match "(?<num>[-]{0,1}\d{1,})" # Parses integer from input
-                $Match=[int]$Matches.num
-
-                # Validate bounds
-                $Lower=$RmAPI.ReplaceVariablesStr($($Bound -split ":")[0]) # Obtains lower bound and upper bound, $RmAPI.ReplaceVariableStr is used to parse any bounds that may be represented by a rm variable
-                $Upper=$RmAPI.ReplaceVariablesStr($($Bound -split ":")[1])
-
-                if((!$Match -and ($Match -ne 0))) { # If the parsed result is not an integer
-                    return
-                } 
-                if(($Lower) -and ($Match -lt $Lower)) { # If a lower bound exist, and if the input is smaller than the lower bound, reject
-                    return
-                }
-                if(($Upper) -and  ($Match -gt $Upper)) { # If an upper bound exist, and if the input is greater than the upper bound, reject
-                    return 
-                }
+    if(!$NewInput) { # Check if Input is null
+        return
+    }
+    switch($Type) { # Sort according to supposed variable type for sainity check
+        "rgb" {
+            # Validate type and bounds
+            # $Length=0
+            # $($NewInput -split ",") | ForEach-Object { if($_ -In 0..255) {$Length += 1}} # Splits input into xxx,xxx,xxx , check if each of the three numbers are between 0 & 255
+            # if($Length -ne 3) {
+            #     return
+            # }
+            if(!$NewInput -match "^\s*(0|[1-9]\d?|1\d\d?|2[0-4]\d|25[0-5])%?\s*,\s*(0|[1-9]\d?|1\d\d?|2[0-4]\d|25[0-5])%?\s*,\s*(0|[1-9]\d?|1\d\d?|2[0-4]\d|25[0-5])%?\s*$") {
+                return
             }
         }
+        "int" {
+            # Validate type
+            $NewInput -match "(?<num>[-]{0,1}\d{1,})" # Parses integer from input
+            $Match=[int]$Matches.num
+
+            # Validate bounds
+            $Lower=$RmAPI.ReplaceVariablesStr($($Bound -split ":")[0]) # Obtains lower bound and upper bound, $RmAPI.ReplaceVariableStr is used to parse any bounds that may be represented by a rm variable
+            $Upper=$RmAPI.ReplaceVariablesStr($($Bound -split ":")[1])
+
+            if((!$Match -and ($Match -ne 0))) { # If the parsed result is not an integer
+                return
+            } 
+            if(($Lower) -and ($Match -lt $Lower)) { # If a lower bound exist, and if the input is smaller than the lower bound, reject
+                return
+            }
+            if(($Upper) -and  ($Match -gt $Upper)) { # If an upper bound exist, and if the input is greater than the upper bound, reject
+                return 
+            }
+        }
+        # "string" { # 
+        # }
     }
-    $RmAPI.Bang("!WriteKeyValue Variables `"`"`"$($Data[$VariableID]['Name'])`"`"`" `"`"`"$NewInput`"`"`" `"`"`"$File`"`"`" ") # Write new input to file
+    $RmAPI.Bang("!WriteKeyValue Variables `"`"`"$($Data[$VariableID]['Name'])`"`"`" `"`"`"$NewInput`"`"`" `"`"`"$File`"`"`"") # Write new input to file
     $RmAPI.Bang("!Refresh `"`"`"$RootConfig`"`"`" ") # Refresh taskbar
     ValidateModulePositions
     SetInteractableData $Page # Refresh settings
@@ -430,9 +458,8 @@ function ValidateModulePositions {
     # Retrieve taskbar length
     $TaskbarWidth=GetTaskbarWidth
 
-    $ActiveModules | %{
+    $ActiveModules | ForEach-Object{
         $Position=GetModulePosition $_
-        # Write-Host $($TaskbarWidth), $($Position), $($TaskbarWidth - $Position), $($($TaskbarWidth - $Position) -lt 0)
         if($($TaskbarWidth - $Position) -lt 0) { # Iterate over each active module and check if they are within bounds
             $RmAPI.Bang("!WriteKeyValue Variables `"`"`"Module.$($_).P`"`"`" `"`"`"$TaskbarWidth`"`"`" `"`"`"$ModuleFolder\$_\Include\Variables.inc`"`"`" ") # Write new input to file
         }
@@ -443,8 +470,8 @@ function ValidateModulePositions {
 # Initialisation of Setting menu
 # ==========================================================================
 
-# Initialise
 function Initialise {
+    # Initialise
     switch(($RmAPI.VariableStr("CurrentPage"))){
         "General"{
             SetInteractableData "General"
