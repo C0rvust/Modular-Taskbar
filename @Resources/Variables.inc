@@ -40,4 +40,4 @@ Font.IconS=(#Body.Element#*0.75)
 
 ; Do not adjust
 Body.X=210
-Body.Y=0
+Body.Y=20
