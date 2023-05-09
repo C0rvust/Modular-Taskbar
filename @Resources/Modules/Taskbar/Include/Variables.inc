@@ -1,6 +1,6 @@
 [Variables]
 ; vargen|Taskbar Position|Taskbar|int|0:#Body.Width#
-Module.Taskbar.P=86
+Module.Taskbar.P=46
 ; vargen|Taskbar Anchor [0/1/2]|Taskbar|int|0:2
 Module.Taskbar.A=0
 Module.Taskbar.W=(#Module.Taskbar.ProgramCount#*#Module.Taskbar.ProgramW#)

@@ -4,12 +4,12 @@ Body.Element=30
 ; vargen|Element padding|General|int|0:
 Body.Padding=8
 ; vargen|Taskbar width|General|int|0:
-Body.Width=1500
+Body.Width=1200
 Body.Height=(#Body.Element#+2*#Body.Padding#)
 ; vargen|Corner size|General|int|0:
 Body.Corner=6
 ; vargen|PopUp gap|General|int|0:
-Body.PopUp=5
+Body.PopUp=10
 
 ; Background
 ; vargen|Background colour|General|rgb
@@ -39,5 +39,5 @@ Font.Icon=MaterialIcon
 Font.IconS=(#Body.Element#*0.75)
 
 ; Do not adjust
-Body.X=210
-Body.Y=20
+Body.X=2280
+Body.Y=10
