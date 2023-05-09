@@ -16,7 +16,6 @@ Measure=Plugin
 Plugin=ProgramOptions
 Indexes=#Module.Taskbar.ProgramCount#
 AdditionalDependencies=#Module.Taskbar.AddDep#
-WindowMirrorPath=#Module.Taskbar.WMPath#
 UpdateDivider=(1000/#UpdateInterval#)
 
 [Module.Taskbar.PSRM]
@@ -25,7 +24,7 @@ Plugin=PowerShellRM
 ScriptFile=#@#Modules\Taskbar\Include\Taskbar.ps1
 UpdateDivider=(1000/#UpdateInterval#)
 
-[Module.Taskbar.PSRM2]
+[Module.Taskbar.PSRMParam]
 Measure=Plugin
 Plugin=PowershellRM
 Param=214,85,113|255
