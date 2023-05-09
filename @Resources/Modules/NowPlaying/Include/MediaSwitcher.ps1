@@ -10,18 +10,16 @@ function SetPlayerHierachy {
 }
 
 function ReturnActivePlayer {
-    $PlayerList=$Global:PlayerList # Given the set hierachy
-    For($i=0; $i -lt $PlayerList.length; $i++){ # Choose the one that is hghest in hierachy and is currently playing media
-        If($($RMAPI.Measure("MSState."+$PlayerList[$i])) -eq 1){
-            Return $PlayerList[$i]
+
+    $PlayerList=$Global:PlayerList 
+    for ($state=1; $state -le 2; $state++){ # First find the first player that is playing media (1), if not then find the first player that is currently paused
+        for ($i=0; $i -lt $PlayerList.length; $i++) {
+            if($($RMAPI.Measure("MSState."+$PlayerList[$i])) -eq $state) {
+                Return $PlayerList[$i]
+            }
         }
     }
-    For($i=0; $i -lt $PlayerList.length; $i++){ # Otherwise choose the one that is highest in hierachy and is currently paused
-        If($($RMAPI.Measure("MSState."+$PlayerList[$i])) -eq 2){
-            Return $PlayerList[$i]
-        }
-    }
-    Return "" # Otherwise return "no player avaliable"
+    Return $null # Otherwise return "no player avaliable"
 }
 
 function SetActivePlayer {

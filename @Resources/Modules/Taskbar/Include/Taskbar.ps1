@@ -173,7 +173,7 @@ x=($($i)*#Module.Taskbar.ProgramW#+(#Module.Taskbar.ProgramW#-#Module.Taskbar.Ic
 
 "@
         }
-        $Content | Out-File $Destination
+        $Content | Out-File -FilePath $Destination
         $RMAPI.Bang("!Refresh")
     }
 }

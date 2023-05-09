@@ -1,6 +1,6 @@
 [Variables]
 ; vargen|NowPlaying Position|NowPlaying|int|0:#Body.Width#
-Module.NowPlaying.P=750
+Module.NowPlaying.P=600
 ; vargen|NowPlaying Anchor [0/1/2]|NowPlaying|int|0:2
 Module.NowPlaying.A=1
 Module.NowPlaying.W=(12*#Body.Element#)

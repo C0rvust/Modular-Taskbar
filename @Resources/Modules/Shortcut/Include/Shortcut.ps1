@@ -20,7 +20,8 @@ LeftMouseUpAction=[`"#@#Modules\Shortcut\Include\Shortcuts\$($_.Name)`"]
 
 "@
         }
-        $Content | Out-File $Dest
+        
+        $Content | Out-File -FilePath $Dest
     }
 }
 
