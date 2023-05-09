@@ -4,23 +4,30 @@ It is recommended (but not required) that you remove your stock taskbar via 3par
 
 # Installing
 The latest release of Modular Taskbar can be found [here](https://github.com/C0rvust/Modular-Taskbar/releases). Simply run the `.rmskin` file once downloaded.
-Modular Taskbar requires the Rainmeter application (minimum version `4.5.14.3663`), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
+Modular Taskbar requires the Rainmeter application (minimum version `4.5.17.3700`), the installation instructions can be found on their homepage [here](https://www.rainmeter.net/).
 
 # Preview
-<img src=".Assets/Overview3.png" width="100%"/>
-<img src=".Assets/Overview4.png" width="100%"/>
-<img src=".Assets/Overview5.png" width="100%"/>
+<img src="https://user-images.githubusercontent.com/40166216/237038870-dd219d84-b1fa-476f-92cc-6a92bbef91eb.png" width="100%"/>
+<img src="https://user-images.githubusercontent.com/40166216/237038878-20f5c516-32e9-4b4b-8acb-b97dc31537fb.png" width="100%"/>
+<img src="https://user-images.githubusercontent.com/40166216/237038884-c160225f-c569-4fb4-b0a1-cbd5353c117a.png" width="100%"/>
 
 # Requirements
 
 - [MagickMeter by khanhas](https://github.com/khanhas/MagickMeter) - Follow these [instructions](https://github.com/khanhas/MagickMeter#how-to-install) to install the parent application ImageMagick.
 
-- [WebNowPlaying by tjhrulz](https://github.com/tjhrulz/WebNowPlaying) - Follow these [instructions](https://github.com/tjhrulz/WebNowPlaying#extension-links) to install the browser extension. 
+- [WebNowPlaying-Redux by Keifufu & tjhrulz](https://github.com/keifufu/WebNowPlaying-Redux-Rainmeter) - Install the wnp browser extension from [here](https://github.com/keifufu/WebNowPlaying-Redux#installing).
 
-- [Spicetify-CLI by khanhas](https://github.com/khanhas/spicetify-cli) - Follow these [instructions](https://github.com/khanhas/spicetify-cli/wiki/Guide-for-Rainmeter-user) to install Spicetify-CLI. _If you don't use Spotify, no further actions are required._
+- [Spicetify-CLI by khanhas](https://github.com/khanhas/spicetify-cli) - Open a powershell window and run the following code line by line.
+  - _If you don't use Spotify, no further actions are required._
 
-- [PowershellRM by Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Follow these [instructions](https://github.com/khanhas/PowershellRM#requirements) to update your powershell version (Version `3.x` or above). 
-_As Win 10 is shipped with Powershell_ `5.1`_, no further actions are required by Win 10 users; update is required only for Win 7 users._
+```ps1
+Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/khanhas/spicetify-cli/master/install.ps1" | Invoke-Expression
+spicetify
+spicetify config extensions webnowplaying.js
+```
+
+- [PowershellRM by Khanhas](https://github.com/khanhas/PowershellRM#requirements) - Update your Powershell to (Version `3.x` or above) [here](https://www.microsoft.com/en-us/download/details.aspx?id=54616). 
+  - _As Win 10 is shipped with Powershell_ `5.1`_, no further actions are required by Win 10 users; update is required only for Win 7 users._
 
 # Features
 ## Modules
