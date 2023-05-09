@@ -1,6 +1,5 @@
 $RootConfig=$RmAPI.VariableStr("RootConfig")
 $Resources=$RmAPI.VariableStr("@")
-# $VariablesFile=$RmAPI.VariableStr("@") + "Variables.inc"
 $ModuleListFile=$RmAPI.VariableStr("@") + "ModuleList.inc"
 $ModuleFolder=$RmAPI.VariableStr("@") + "Modules"
 $SettingsFolder=$RmAPI.VariableStr("@") + "Settings"
