@@ -44,7 +44,7 @@ OnFinishAction=[!DisableMeasure #CurrentSection#]
 [Module.Taskbar.Container]
 Meter=Image
 x=(#Module.Taskbar.P#-(#Module.Taskbar.A#*0.5)*#Module.Taskbar.W#)
-y=((#Body.Height#-#Body.Element#)/2)
+y=((#Skin.Height#-#Body.Element#)/2)
 w=#Module.Taskbar.W#
 h=#Body.Element#
 SolidColor=0,0,0
