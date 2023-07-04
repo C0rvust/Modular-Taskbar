@@ -22,7 +22,7 @@ ScriptFile=#@#Modules\Shortcut\Include\Shortcut.ps1
 
 [Module.Shortcut.Container]
 Meter=Image
-x=(#Module.Shortcut.P#-(#Module.Shortcut.A#*0.5)*#Module.Shortcut.W#)
+x=(#Body.Border#+#Module.Shortcut.P#-(#Module.Shortcut.A#*0.5)*#Module.Shortcut.W#)
 y=((#Skin.Height#-#Body.Element#)/2)
 w=#Module.Shortcut.W#
 h=#Body.Element#

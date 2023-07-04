@@ -16,7 +16,7 @@ DynamicVariables=1
 
 [Module.Power.Container]
 Meter=Image
-x=(#Module.Power.P#-(#Module.Power.A#*0.5)*#Module.Power.W#)
+x=(#Body.Border#+#Module.Power.P#-(#Module.Power.A#*0.5)*#Module.Power.W#)
 y=((#Skin.Height#-#Body.Element#)/2)
 w=#Module.Power.W#
 h=#Body.Element#
