@@ -10,6 +10,8 @@ Body.Height=(#Body.Element#+2*#Body.Padding#)
 Body.Corner=6
 ; vargen|PopUp gap|General|int|0:
 Body.PopUp=10
+; vargen|Border size|General|int|0:
+Body.Border=1
 
 ; Background
 ; vargen|Background colour|General|rgb
@@ -28,6 +30,12 @@ Colour.2.Alpha=255
 Colour.3=216,0,46
 ; vargen|Highlight alpha|General|int|0:255
 Colour.3.Alpha=255
+
+; Border
+; vargen|Border colour|General|rgb
+Colour.4=214,85,113
+; vargen|Border alpha|General|int|0:255
+Colour.4.Alpha=0
 
 
 ; Adjustable but not recommended

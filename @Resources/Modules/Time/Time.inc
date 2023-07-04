@@ -26,7 +26,7 @@ OnChangeAction=[!UpdateMeter Module.Time.TimeDisplay]
 [Module.Time.Container]
 Meter=Image
 x=(#Module.Time.P#-(#Module.Time.A#*0.5)*#Module.Time.W#)
-y=((#Body.Height#-#Body.Element#)/2)
+y=((#Skin.Height#-#Body.Element#)/2)
 w=#Module.Time.W#
 h=#Body.Element#
 SolidColor=0,0,0

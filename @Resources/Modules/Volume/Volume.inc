@@ -41,7 +41,7 @@ Formula=(Module.Volume.VolumeCalc=0?0:(Module.Volume.VolumeCalc<50?1:2))
 [Module.Volume.Container]
 Meter=Image
 x=(#Module.Volume.P#-(#Module.Volume.A#*0.5)*#Module.Volume.W#)
-y=((#Body.Height#-#Body.Element#)/2)
+y=((#Skin.Height#-#Body.Element#)/2)
 w=#Module.Volume.W#
 h=#Body.Element#
 SolidColor=0,0,0
