@@ -19,7 +19,7 @@ OnChangeAction=[!UpdateMeter Module.Time.TimeDisplay]
 
 [Module.Time.Time.HM]
 Measure=Time
-Format=%H : %M
+Format=#Module.Time.F#
 UpdateDivider=(5000/#UpdateInterval#)
 OnChangeAction=[!UpdateMeter Module.Time.TimeDisplay]
 
@@ -37,7 +37,7 @@ LeftMouseUpAction=[!CommandMeasure Main.PSRM "Update"][!WriteKeyValue Variables 
 Group=Module.Time.Display
 MeterStyle=Module.Time.StyleInfoString
 Meter=String
-x=#Body.Element#
+x=(#Module.Time.W#/2)
 y=(#Body.Element#*12/24)
 MeasureName=Module.Time.Time.HM
 DynamicVariables=1
