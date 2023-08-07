@@ -320,7 +320,7 @@ function SetInteractableData {
                 $RmAPI.Bang("!HideMeter `"`"`"Button.$i`"`"`" ")
                 $RmAPI.Bang("!SetOption Label.$i Text `"`"`"$($Data[$i]["Desc"])`"`"`" ")
                 $RmAPI.Bang("!SetOption Value.$i Text `"`"`"$($Data[$i]["Value"])`"`"`" ")
-                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"$($Data[$i]["Path"])`" `'$`UserInput$`' `"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=$($Data[$i]["Value"]) `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
+                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"$($Data[$i]["Path"])`" `'$`UserInput$`' `"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=`"$($Data[$i]["Value"])`" `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
             }
             $RmAPI.Bang("!UpdateMeterGroup `"`"`"Interactable`"`"`" ")
             $RmAPI.Bang("!Redraw")
@@ -362,7 +362,7 @@ function SetInteractableData {
                 $RmAPI.Bang("!HideMeter `"`"`"Button.$i`"`"`" ")
                 $RmAPI.Bang("!SetOption Label.$i Text `"`"`"$($Data[$i]["Desc"])`"`"`" ")
                 $RmAPI.Bang("!SetOption Value.$i Text `"`"`"$($Data[$i]["Value"])`"`"`" ")
-                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"$($Data[$i]["Path"])`" `'$`UserInput$`' `"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=$($Data[$i]["Value"]) `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
+                $RmAPI.Bang("!SetOption Value.$i LeftMouseUpAction `"`"`"[!SetOption InputText Command1 `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"ValidateVariableInput $Page $i `"$($Data[$i]["Path"])`" `'$`UserInput$`' `"`"`"] y=([`*Value.$i`:y*]`+#*Padding*#) defaultvalue=`"$($Data[$i]["Value"])`" `"`"`"][!UpdateMeasure InputText][!CommandMeasure InputText `"`"`"ExecuteBatch 1`"`"`"]`"`"`" ")
             }
             $RmAPI.Bang("!ShowMeter `"`"`"Setting.ButtonReturn`"`"`" ")
             $RmAPI.Bang("!SetOption `"`"`"Setting.ButtonReturn`"`"`" LeftMouseUpAction `"`"`"[!CommandMeasure $($RmAPI.GetMeasureName()) `"`"`"SetInteractableData Modules`"`"`"] `"`"`" ")
