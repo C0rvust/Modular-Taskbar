@@ -26,7 +26,7 @@ UpdateDivider=(1000/#UpdateInterval#)
 [Module.Taskbar.PSRMParam]
 Measure=Plugin
 Plugin=PowershellRM
-Param=214,85,113|255
+Param=193,149,193|255
 Line=$Saved=$RmAPI.OptionStr("Param")
 Line2=$Var0=$RmAPI.VariableStr("Colour.2"); $Var1=$RmAPI.VariableStr("Colour.2.Alpha"); $Exist=[System.IO.File]::Exists("#@#Modules\Taskbar\Include\Dependencies\Icons\.Default.png"); $Var="$Var0|$Var1"
 Line3=if(($Saved -ne $Var) -or ($Exist -eq $False)) {$RmAPI.Bang("!WriteKeyValue $($RmAPI.GetMeasureName()) Param `"`"`"$Var`"`"`" `"`"`"$($RmAPI.VariableStr("@") + "Modules\Taskbar\Taskbar.inc")`"`"`" "); $RmAPI.Bang("!EnableMeasure Module.Taskbar.MM.IconDefault"); $RmAPI.Bang("!CommandMeasure Module.Taskbar.MM.IconDefault Update")}
