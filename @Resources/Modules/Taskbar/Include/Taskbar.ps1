@@ -5,8 +5,13 @@ $RootConfigPath=$RmApi.VariableStr("RootConfigPath")
 $DependenciesPath=$RmApi.VariableStr("Module.Taskbar.DependenciesPath")
 $StockIconPath=$RmAPI.VariableStr("Module.Taskbar.StockIconPath")
 $GenIconPath="$($DependenciesPath)\Icons"
+$UseMinimalIcon=$RmAPI.VariableStr("Module.Taskbar.UseMinimalIcon");
 
-function ReturnMaxProgramCount { # Retrieves the #ProgramCount# Variable
+function ReturnProcessCount { # Retrieves the number of active processes
+    return ($RmAPI.Variable("ProcessCount",0))
+}
+
+function ReturnMaxProgramCount { # Retrieves the maximum number of icons allowed to be shown at once
     return ($RmAPI.Variable("Module.Taskbar.ProgramCount",0))
 }
 
@@ -64,7 +69,10 @@ function SetProgramImage { # Set the icon image of a particular program
     Param([Int] $ID)
 
     $ProgramName=ReturnProgramName($ID)
-    $StockIcons=ReturnStockIcons
+    $StockIcons;
+    if($UseMinimalIcon -eq "0") {
+        $StockIcons=ReturnStockIcons
+    }
     $StockIconPath=$StockIconPath
     $GenIconPath=$GenIconPath
 
@@ -72,15 +80,14 @@ function SetProgramImage { # Set the icon image of a particular program
         $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageName `"`"`"`"`"`" ") # Clears image
     }
     Else {
-        If($StockIcons -clike $ProgramName){ # if there exist a stock icon, then use the stock icon instead, if not use the generated one
-            $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageName `"`"`"$StockIconPath\$ProgramName.png`"`"`" ") # Using stock icon
-        }
-        Else{
-            if($(ReturnIsIconExist $(ReturnProgramName $ID))) {
-                $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageName `"`"`"$GenIconPath\$ProgramName.png`"`"`" ") # Using retrieved icon
+        $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageName `"`"`"$GenIconPath\$DefaultIcon.png`"`"`" ") # Using default icon
+        
+        if($UseMinimalIcon -eq "0") {
+            If($StockIcons -clike $ProgramName){ # if there exist a stock icon, then use the stock icon instead, if not use the generated one
+                $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageName `"`"`"$StockIconPath\$ProgramName.png`"`"`" ") # Using stock icon
             }
-            else {
-                $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageName `"`"`"$GenIconPath\$DefaultIcon.png`"`"`" ") # Using retrieved icon
+            Elseif($(ReturnIsIconExist $(ReturnProgramName $ID))) {
+                $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageName `"`"`"$GenIconPath\$ProgramName.png`"`"`" ") # Using retrieved icon
             }
         }
     }
@@ -122,17 +129,16 @@ function MouseOverAction {
     Param([Int] $ID)
 
     # MouseOver Animation
-    $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageTint `"`"`"255,255,255`"`"`" ")
+    $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageAlpha `"`"`"$($RmAPI.VariableStr("Colour.2.Alpha"))`"`"`" ")
     $RmAPI.Bang("!UpdateMeter $MeterPrefix$ID")
 
     $ProgramCount=ReturnProgramCount($ID)
     if($ProgramCount -gt 0){
         # Set PopUp coordinates
         $RMAPI.Bang("!CommandMeasure Main.PSRM `"`"`"Update`"`"`"")
-        $Container=$RmAPI.ReplaceVariables("[Module.Taskbar.Container:x]")
-        $Width=$RmAPI.VariableStr("Module.Taskbar.ProgramW")
-        $Size=$RmAPI.VariableStr("Module.Taskbar.IconSize")
-        $Coord="($Container+$ID*$Width+($Width-$Size)*0.5+$Width*0.5)"
+        $Meter=$RmAPI.ReplaceVariables("[Module.Taskbar.Icon.$($ID):x]")
+        $Width=$RmAPI.ReplaceVariables("[Module.Taskbar.Icon.$($ID):w]")
+        $Coord="($Meter+$Width*0.5)"
         $RmAPI.Bang("!WriteKeyValue Variables Parent.Position `"`"`"$Coord`"`"`" `"`"`"$($RootConfigPath)PopUp\Taskbar_PopUp.ini`"`"`" ")
         
         # Generates Item List
@@ -144,7 +150,7 @@ function MouseLeaveAction {
     Param([Int] $ID)
 
     # MouseLeave Animation
-    $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageTint `"`"`"$($RmAPI.VariableStr("Module.Taskbar.DefaultShade"))`"`"`" ")
+    $RmAPI.Bang("!SetOption $MeterPrefix$ID ImageAlpha `"`"`"$($RmAPI.VariableStr("Colour.2.Alpha")*0.5)`"`"`" ")
     $RmAPI.Bang("!UpdateMeter $MeterPrefix$ID")
 
     $ProgramCount=ReturnProgramCount($ID)
@@ -169,7 +175,7 @@ Module.Taskbar.GennedItemCount=$($Count)
 [$($MeterPrefix)$($i)]
 Meter=Image
 MeterStyle=Module.Taskbar.StyleIcon
-x=($($i)*#Module.Taskbar.ProgramW#+(#Module.Taskbar.ProgramW#-#Module.Taskbar.IconSize#)*0.5)
+x=((#Module.Taskbar.ElementAlignment#=0?$($i):(#Module.Taskbar.ElementAlignment#=1?($($i)+((#Module.Taskbar.ProgramCount#-#ProcessCount#)*0.5)):($($Count-$i-1))))*#Module.Taskbar.ProgramW#+(#Module.Taskbar.ProgramW#-#Module.Taskbar.IconSize#)*0.5)
 
 "@
         }
@@ -203,7 +209,9 @@ function GeneratePopUpItemInc { # Generates an .inc file containing the appropri
 }
 
 function UpdateNow {
-    RunGetIcons
+    if($UseMinimalIcon -eq "0") {
+        RunGetIcons
+    }
     $ProgramCount=ReturnMaxProgramCount 
     for($i=0; $i -lt $ProgramCount; $i++) { # iterate through all programs
         SetProgramImage $i

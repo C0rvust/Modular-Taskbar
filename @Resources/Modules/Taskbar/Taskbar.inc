@@ -5,7 +5,7 @@
 Group=Module.Taskbar.Icon
 y=((#Body.Element#-#Module.Taskbar.IconSize#)/2)
 w=#Module.Taskbar.IconSize#
-ImageTint=#Module.Taskbar.DefaultShade#
+ImageAlpha=(#Colour.2.Alpha#*0.5)
 DynamicVariables=1
 AntiAlias=1
 Container=Module.Taskbar.Container
