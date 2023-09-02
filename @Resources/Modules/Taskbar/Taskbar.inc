@@ -1,6 +1,5 @@
 [Variables]
 @IncludeTaskbarVariables=#@#Modules\Taskbar\Include\Variables.inc
-@IncludeTaskbarIcon=#@#Modules\Taskbar\Include\Item.inc
 
 [Module.Taskbar.StyleIcon]
 Group=Module.Taskbar.Icon
@@ -49,3 +48,6 @@ w=#Module.Taskbar.W#
 h=#Body.Element#
 SolidColor=0,0,0
 DynamicVariables=1
+
+[Module.Taskbar.Icons]
+@IncludeTaskbarIcon=#@#Modules\Taskbar\Include\Item.inc
